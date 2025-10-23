@@ -18,10 +18,13 @@ class Umkm extends Model
         'review_count',
         'address',
         'kecamatan',
-        'status'
+        'map_link',
+        'jam_buka',
+        'jam_tutup',
+        'status',
+        'no_wa'
     ];
 
-    // Relasi: Setiap UMKM hanya punya satu kategori
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
