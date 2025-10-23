@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UmkmController extends Controller
 {
-
     public function index()
     {
         $umkms = Umkm::with('category')->get()->map(function ($umkm) {
@@ -38,6 +37,10 @@ class UmkmController extends Controller
             'review_count' => 'nullable|integer|min:0',
             'address' => 'nullable|string|max:255',
             'kecamatan' => 'nullable|in:Kudus Kota,Jati,Bae,Mejobo,Undaan,Gebog,Dawe',
+            'map_link' => 'nullable|url|max:255',
+            'jam_buka' => 'nullable|date_format:H:i',
+            'jam_tutup' => 'nullable|date_format:H:i',
+            'no_wa' => 'nullable|string|min:10|max:20', // ✅ minimal 10 karakter
         ]);
 
         if ($validator->fails()) {
@@ -112,6 +115,10 @@ class UmkmController extends Controller
             'review_count' => 'nullable|integer|min:0',
             'address' => 'nullable|string|max:255',
             'kecamatan' => 'nullable|in:Kudus Kota,Jati,Bae,Mejobo,Undaan,Gebog,Dawe',
+            'map_link' => 'nullable|url|max:255',
+            'jam_buka' => 'nullable|date_format:H:i',
+            'jam_tutup' => 'nullable|date_format:H:i',
+            'no_wa' => 'nullable|string|min:10|max:20', // ✅ minimal 10 karakter
         ]);
 
         if ($validator->fails()) {
@@ -157,7 +164,6 @@ class UmkmController extends Controller
             ], 404);
         }
 
-
         if ($umkm->status === 'inactive') {
             if ($umkm->image && !str_starts_with($umkm->image, 'http')) {
                 $umkm->image = asset('storage/' . $umkm->image);
@@ -184,5 +190,27 @@ class UmkmController extends Controller
         ], 200);
     }
 
+    public function countByKecamatan($kecamatan)
+    {
+        $validKecamatan = ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'];
 
+        if (!in_array($kecamatan, $validKecamatan)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Nama kecamatan tidak valid',
+                'data' => null
+            ], 400);
+        }
+
+        $count = Umkm::where('kecamatan', $kecamatan)
+            ->where('status', 'active')
+            ->count();
+
+        return response()->json([
+            'status' => true,
+            'message' => "Jumlah UMKM di kecamatan {$kecamatan}",
+            'kecamatan' => $kecamatan,
+            'total_umkm' => $count
+        ], 200);
+    }
 }

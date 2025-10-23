@@ -37,21 +37,16 @@ class CategorySeeder extends Seeder
                 'icon' => $baseUrl . 'peternakan.png',
                 'desc' => 'Produk hasil peternakan seperti telur, susu, daging, dan olahannya dari peternak lokal.'
             ],
-            // [
-            //     'name' => 'Pertanian',
-            //     'icon' => $baseUrl . 'pertanian.png',
-            //     'desc' => 'Hasil panen lokal seperti sayuran segar, buah, padi, dan tanaman hias.'
-            // ],
             [
                 'name' => 'Fashion',
                 'icon' => $baseUrl . 'fashion.png',
                 'desc' => 'Produk pakaian, sepatu, tas, dan aksesoris buatan pengrajin lokal.'
             ],
-            // [
-            //     'name' => 'Kerajinan',
-            //     'icon' => $baseUrl . 'kerajinan.png',
-            //     'desc' => 'Hasil karya tangan seperti batik Kudus, ukiran kayu, dan produk kreatif lainnya.'
-            // ],
+            [
+                'name' => 'Lainnya',
+                'icon' => $baseUrl . 'lainnya.png',
+                'desc' => 'Kategori untuk item atau produk yang tidak termasuk dalam kategori utama lainnya.'
+            ],
             [
                 'name' => 'Teknologi',
                 'icon' => $baseUrl . 'teknologi.png',
