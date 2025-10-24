@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class RatingWebsiteController extends Controller
 {
-    /**
-     * 🔹 Menampilkan semua rating (Public & Admin)
-     */
     public function index()
     {
         $ratings = RatingWebsite::orderBy('created_at', 'desc')->get()->map(function ($rating) {
@@ -29,9 +26,6 @@ class RatingWebsiteController extends Controller
         ], 200);
     }
 
-    /**
-     * 🔹 Menampilkan detail rating berdasarkan ID
-     */
     public function show($id)
     {
         $rating = RatingWebsite::find($id);
@@ -55,9 +49,6 @@ class RatingWebsiteController extends Controller
         ], 200);
     }
 
-    /**
-     * 🟢 Menyimpan rating baru (Public)
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -79,7 +70,6 @@ class RatingWebsiteController extends Controller
 
         $data = $validator->validated();
 
-        // Upload foto profil jika ada
         if ($request->hasFile('photo_profil')) {
             $data['photo_profil'] = $request->file('photo_profil')->store('uploads/rating_photos', 'public');
         }
@@ -97,9 +87,6 @@ class RatingWebsiteController extends Controller
         ], 201);
     }
 
-    /**
-     * 🟣 Melihat rata-rata rating (Admin)
-     */
     public function average()
     {
         $average = RatingWebsite::avg('rating');
@@ -111,9 +98,6 @@ class RatingWebsiteController extends Controller
         ], 200);
     }
 
-    /**
-     * 🔴 Menghapus rating tertentu (Admin)
-     */
     public function destroy($id)
     {
         $rating = RatingWebsite::find($id);
@@ -126,7 +110,6 @@ class RatingWebsiteController extends Controller
             ], 404);
         }
 
-        // Hapus file gambar jika ada
         if ($rating->photo_profil && Storage::disk('public')->exists($rating->photo_profil)) {
             Storage::disk('public')->delete($rating->photo_profil);
         }

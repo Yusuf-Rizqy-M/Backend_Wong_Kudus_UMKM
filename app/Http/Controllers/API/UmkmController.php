@@ -16,7 +16,25 @@ class UmkmController extends Controller
             if ($umkm->image) {
                 $umkm->image = url(Storage::url($umkm->image));
             }
-            return $umkm;
+            return [
+                'id' => $umkm->id,
+                'name' => $umkm->name,
+                'description' => $umkm->description,
+                'category_id' => $umkm->category_id,
+                'category' => $umkm->category,
+                'address' => $umkm->address,
+                'kecamatan' => $umkm->kecamatan,
+                'rating' => $umkm->rating,
+                'review_count' => $umkm->review_count,
+                'map_link' => $umkm->map_link,
+                'jam_buka' => $umkm->jam_buka,
+                'jam_tutup' => $umkm->jam_tutup,
+                'no_wa' => $umkm->no_wa,
+                'status' => $umkm->status, // ✅ tampilkan status
+                'image' => $umkm->image,
+                'created_at' => $umkm->created_at,
+                'updated_at' => $umkm->updated_at,
+            ];
         });
 
         return response()->json([
@@ -40,7 +58,7 @@ class UmkmController extends Controller
             'map_link' => 'nullable|url|max:255',
             'jam_buka' => 'nullable|date_format:H:i',
             'jam_tutup' => 'nullable|date_format:H:i',
-            'no_wa' => 'nullable|string|min:10|max:20', // ✅ minimal 10 karakter
+            'no_wa' => 'nullable|string|min:10|max:20', 
         ]);
 
         if ($validator->fails()) {
@@ -52,6 +70,7 @@ class UmkmController extends Controller
         }
 
         $data = $validator->validated();
+        $data['status'] = 'active'; // ✅ default aktif
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/umkm', 'public');
@@ -90,7 +109,24 @@ class UmkmController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Detail data UMKM ditemukan',
-            'data' => $umkm
+            'data' => [
+                'id' => $umkm->id,
+                'name' => $umkm->name,
+                'description' => $umkm->description,
+                'category' => $umkm->category,
+                'address' => $umkm->address,
+                'kecamatan' => $umkm->kecamatan,
+                'rating' => $umkm->rating,
+                'review_count' => $umkm->review_count,
+                'map_link' => $umkm->map_link,
+                'jam_buka' => $umkm->jam_buka,
+                'jam_tutup' => $umkm->jam_tutup,
+                'no_wa' => $umkm->no_wa,
+                'status' => $umkm->status, // ✅ tampilkan status
+                'image' => $umkm->image,
+                'created_at' => $umkm->created_at,
+                'updated_at' => $umkm->updated_at,
+            ]
         ], 200);
     }
 
@@ -118,7 +154,8 @@ class UmkmController extends Controller
             'map_link' => 'nullable|url|max:255',
             'jam_buka' => 'nullable|date_format:H:i',
             'jam_tutup' => 'nullable|date_format:H:i',
-            'no_wa' => 'nullable|string|min:10|max:20', // ✅ minimal 10 karakter
+            'no_wa' => 'nullable|string|min:10|max:20', 
+            'status' => 'nullable|in:active,inactive' // ✅ validasi status opsional
         ]);
 
         if ($validator->fails()) {

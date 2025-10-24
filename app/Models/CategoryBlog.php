@@ -9,7 +9,6 @@ class CategoryBlog extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'description', 'status'];
-
     public function articles()
     {
         return $this->hasMany(ArticleBlog::class);
