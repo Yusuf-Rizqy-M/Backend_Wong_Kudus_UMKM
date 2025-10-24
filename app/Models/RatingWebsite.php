@@ -11,12 +11,5 @@ class RatingWebsite extends Model
 
     protected $table = 'rating_website';
 
-    protected $fillable = [
-        'name',
-        'name_last',
-        'email',
-        'rating',
-        'photo_profil',
-        'comment',
-    ];
+    protected $fillable = ['name','name_last','email','rating','photo_profil','comment',];
 }
