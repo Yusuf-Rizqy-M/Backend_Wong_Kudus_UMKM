@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactUmkmController extends Controller
 {
-    /**
-     * Menampilkan semua pesan yang masuk
-     */
     public function index()
     {
         $contacts = ContactUmkm::orderBy('created_at', 'desc')->get();
@@ -23,9 +20,6 @@ class ContactUmkmController extends Controller
         ], 200);
     }
 
-    /**
-     * Mengirim pesan baru
-     */
     public function send(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -60,9 +54,6 @@ class ContactUmkmController extends Controller
         ], 201);
     }
 
-    /**
-     * Menampilkan detail pesan berdasarkan ID
-     */
     public function show($id)
     {
         $contact = ContactUmkm::find($id);
@@ -82,9 +73,6 @@ class ContactUmkmController extends Controller
         ], 200);
     }
 
-    /**
-     * Menonaktifkan pesan (soft delete manual)
-     */
     public function destroy($id)
     {
         $contact = ContactUmkm::find($id);

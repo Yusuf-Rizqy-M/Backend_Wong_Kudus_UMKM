@@ -5,9 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Jalankan migration.
-     */
     public function up(): void
     {
         Schema::create('article_blogs', function (Blueprint $table) {
@@ -16,15 +13,12 @@ return new class extends Migration {
             $table->string('author');
             $table->string('title');
             $table->text('content')->nullable();
-            $table->string('image')->nullable(); // Thumbnail artikel
+            $table->string('image')->nullable(); 
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse migration.
-     */
     public function down(): void
     {
         Schema::dropIfExists('articles');
