@@ -36,13 +36,14 @@ class CategoryBlogController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Kategori berhasil dibuat.',
-            'data' => $category,
+            'data' => $category->only(['id', 'title', 'description', 'status', 'created_at', 'updated_at'])
         ], 201);
     }
 
     public function getCategory($id)
     {
-        $category = CategoryBlog::where('id', $id)->where('status', 'active')->first();
+        $category = CategoryBlog::where('id', $id)->first();
+
         if (!$category) {
             return response()->json([
                 'status' => false,
@@ -53,13 +54,13 @@ class CategoryBlogController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Kategori berhasil ditemukan.',
-            'data' => $category
+            'data' => $category->only(['id', 'title', 'description', 'status', 'created_at', 'updated_at'])
         ], 200);
     }
 
     public function getCategories()
     {
-        $categories = CategoryBlog::where('status', 'active')->get();
+        $categories = CategoryBlog::all(['id', 'title', 'description', 'status', 'created_at', 'updated_at']);
 
         if ($categories->isEmpty()) {
             return response()->json([
@@ -78,9 +79,13 @@ class CategoryBlogController extends Controller
 
     public function updateCategory(Request $request, $id)
     {
-        $category = CategoryBlog::where('id', $id)->where('status', 'active')->first();
+        $category = CategoryBlog::find($id);
+
         if (!$category) {
-            return response()->json(['status' => false, 'message' => 'Kategori tidak ditemukan.'], 404);
+            return response()->json([
+                'status' => false,
+                'message' => 'Kategori tidak ditemukan.'
+            ], 404);
         }
 
         $validator = Validator::make($request->all(), [
@@ -104,13 +109,14 @@ class CategoryBlogController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Kategori berhasil diubah.',
-            'data' => $category,
+            'data' => $category->only(['id', 'title', 'description', 'status', 'created_at', 'updated_at'])
         ]);
     }
 
     public function deleteCategory($id)
     {
-        $category = CategoryBlog::where('id', $id)->where('status', 'active')->first();
+        $category = CategoryBlog::find($id);
+
         if (!$category) {
             return response()->json([
                 'status' => false,
@@ -130,7 +136,8 @@ class CategoryBlogController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Kategori berhasil dinonaktifkan.'
+            'message' => 'Kategori berhasil dinonaktifkan.',
+            'data' => $category->only(['id', 'title', 'description', 'status', 'created_at', 'updated_at'])
         ]);
     }
 

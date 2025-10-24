@@ -12,11 +12,5 @@ class ContactUmkm extends Model
     protected $table = 'contact_umkm';
 
     protected $fillable = [
-        'sender_name',
-        'sender_name_last',
-        'sender_email',
-        'no_telepon',
-        'message',
-        'status',
-    ];
+        'sender_name','sender_name_last','sender_email','no_telepon','message','status',];
 }

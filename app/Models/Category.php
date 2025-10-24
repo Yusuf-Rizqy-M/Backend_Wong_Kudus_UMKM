@@ -8,13 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'desc',
-        'icon',
-        'status'
-    ];
+    protected $fillable = ['name','desc','icon','status'];
 
     public function umkms()
     {

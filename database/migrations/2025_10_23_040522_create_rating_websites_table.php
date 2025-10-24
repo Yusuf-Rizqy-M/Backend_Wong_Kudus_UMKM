@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Jalankan migration.
-     */
     public function up(): void
     {
         Schema::create('rating_website', function (Blueprint $table) {
@@ -23,9 +20,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Rollback migration.
-     */
     public function down(): void
     {
         Schema::dropIfExists('rating_website');

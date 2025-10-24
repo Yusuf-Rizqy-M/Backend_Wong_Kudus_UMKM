@@ -176,7 +176,6 @@ class ArticleController extends Controller
     }
     public function getArticlesByCategory($id)
     {
-        // Cek kategori
         $category = CategoryBlog::where('id', $id)->where('status', 'active')->first();
         if (!$category) {
             return response()->json([
@@ -186,7 +185,6 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        // Ambil artikel aktif
         $articles = ArticleBlog::where('category_blog_id', $id)->where('status', 'active')->get()->map(function ($article) {
             if ($article->image) {
                 $article->image = url(Storage::url($article->image));

@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all()->map(function ($category) {
+        $categories = Category::orderBy('created_at', 'desc')->get()->map(function ($category) {
             if ($category->icon) {
                 $category->icon = url(Storage::url($category->icon));
             }
@@ -72,8 +72,11 @@ class CategoryController extends Controller
             $data['icon'] = $path;
         }
 
-        $category = Category::create($data);
+        // Set default status active
+        $data['status'] = 'active';
 
+        $category = Category::create($data);
+        $category->refresh(); // Pastikan status dan field lain muncul dari DB
 
         if ($category->icon) {
             $category->icon = url(Storage::url($category->icon));
@@ -101,7 +104,8 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|max:255',
             'desc' => 'nullable|string|max:255',
-            'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'status' => 'sometimes|in:active,inactive'
         ]);
 
         if ($validator->fails()) {
@@ -124,6 +128,7 @@ class CategoryController extends Controller
         }
 
         $category->update($data);
+        $category->refresh(); // Ambil ulang data termasuk status
 
         if ($category->icon) {
             $category->icon = url(Storage::url($category->icon));
@@ -162,6 +167,7 @@ class CategoryController extends Controller
 
         $category->status = 'inactive';
         $category->save();
+        $category->refresh();
 
         if ($category->icon && !str_starts_with($category->icon, 'http')) {
             $category->icon = asset('storage/' . $category->icon);
@@ -173,5 +179,4 @@ class CategoryController extends Controller
             'data' => $category
         ], 200);
     }
-
 }
