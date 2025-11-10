@@ -12,8 +12,9 @@ return new class extends Migration {
             $table->foreignId('category_blog_id')->constrained('category_blogs')->onDelete('cascade');
             $table->string('author');
             $table->string('title');
-            $table->text('content')->nullable();
-            $table->string('image')->nullable(); 
+            $table->longText('content');
+
+            $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
