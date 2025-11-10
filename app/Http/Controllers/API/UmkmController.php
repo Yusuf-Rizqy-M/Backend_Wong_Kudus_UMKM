@@ -3,62 +3,85 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Umkm;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule; // <-- DITAMBAHKAN
 
 class UmkmController extends Controller
 {
+    /**
+     * Menampilkan semua data UMKM.
+     */
     public function index()
     {
-        $umkms = Umkm::with('category')->get()->map(function ($umkm) {
-            if ($umkm->image) {
-                $umkm->image = url(Storage::url($umkm->image));
-            }
-            return [
-                'id' => $umkm->id,
-                'name' => $umkm->name,
-                'description' => $umkm->description,
-                'category_id' => $umkm->category_id,
-                'category' => $umkm->category,
-                'address' => $umkm->address,
-                'kecamatan' => $umkm->kecamatan,
-                'rating' => $umkm->rating,
-                'review_count' => $umkm->review_count,
-                'map_link' => $umkm->map_link,
-                'jam_buka' => $umkm->jam_buka,
-                'jam_tutup' => $umkm->jam_tutup,
-                'no_wa' => $umkm->no_wa,
-                'status' => $umkm->status, // ✅ tampilkan status
-                'image' => $umkm->image,
-                'created_at' => $umkm->created_at,
-                'updated_at' => $umkm->updated_at,
-            ];
-        });
+        // Ambil UMKM (dengan kategori) yang statusnya 'active'
+        $umkms = Umkm::with('category') // <-- DIPERBARUI: Eager load kategori
+            ->where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($umkm) {
+                // Ubah path gambar menjadi URL lengkap
+                if ($umkm->hero_image) {
+                    $umkm->hero_image = url(Storage::url($umkm->hero_image));
+                }
+                return $umkm;
+            });
 
         return response()->json([
             'status' => true,
-            'message' => 'Berhasil menampilkan semua data UMKM',
+            'message' => 'Daftar UMKM berhasil diambil',
             'data' => $umkms
         ], 200);
     }
 
+    /**
+     * Menampilkan detail satu UMKM.
+     */
+    public function show($id)
+    {
+        $umkm = Umkm::with('category')->find($id); // <-- DIPERBARUI: Eager load kategori
+
+        if (!$umkm) {
+            return response()->json([
+                'status' => false,
+                'message' => 'UMKM tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+
+        // Ubah path gambar menjadi URL lengkap
+        if ($umkm->hero_image) {
+            $umkm->hero_image = url(Storage::url($umkm->hero_image));
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Detail UMKM berhasil diambil',
+            'data' => $umkm
+        ], 200);
+    }
+
+    /**
+     * Menyimpan UMKM baru.
+     */
     public function store(Request $request)
     {
+        // Daftar kecamatan sesuai enum di migrasi
+        $listKecamatan = ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'];
+
         $validator = Validator::make($request->all(), [
+            'category_id' => 'required|exists:categories,id', // <-- DITAMBAHKAN
+            'kecamatan' => ['nullable', Rule::in($listKecamatan)], // <-- DITAMBAHKAN
             'name' => 'required|string|max:255',
+            'hero_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'hero_title' => 'nullable|string',
+            'hero_subtitle' => 'nullable|string',
             'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'about' => 'nullable|string',
             'rating' => 'nullable|numeric|min:0|max:5',
-            'review_count' => 'nullable|integer|min:0',
-            'address' => 'nullable|string|max:255',
-            'kecamatan' => 'nullable|in:Kudus Kota,Jati,Bae,Mejobo,Undaan,Gebog,Dawe',
-            'map_link' => 'nullable|url|max:255',
-            'jam_buka' => 'nullable|date_format:H:i',
-            'jam_tutup' => 'nullable|date_format:H:i',
-            'no_wa' => 'nullable|string|min:10|max:20', 
         ]);
 
         if ($validator->fails()) {
@@ -70,66 +93,45 @@ class UmkmController extends Controller
         }
 
         $data = $validator->validated();
-        $data['status'] = 'active'; // ✅ default aktif
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads/umkm', 'public');
-            $data['image'] = $path;
+        // Buat slug unik
+        $slug = Str::slug($data['name']);
+        $count = 1;
+        while (Umkm::where('slug', $slug)->exists()) {
+            $slug = Str::slug($data['name']) . '-' . $count;
+            $count++;
         }
+        $data['slug'] = $slug;
+
+        // Handle upload gambar
+        if ($request->hasFile('hero_image')) {
+            $path = $request->file('hero_image')->store('uploads/umkms', 'public');
+            $data['hero_image'] = $path;
+        }
+
+        // Set status default
+        $data['status'] = 'active';
 
         $umkm = Umkm::create($data);
 
-        if ($umkm->image) {
-            $umkm->image = url(Storage::url($umkm->image));
+        // Ambil data baru dengan kategori
+        $umkm->load('category');
+
+        // Ubah path gambar menjadi URL lengkap untuk respons
+        if ($umkm->hero_image) {
+            $umkm->hero_image = url(Storage::url($umkm->hero_image));
         }
 
         return response()->json([
             'status' => true,
-            'message' => 'Data UMKM berhasil ditambahkan',
+            'message' => 'UMKM berhasil dibuat',
             'data' => $umkm
         ], 201);
     }
 
-    public function show($id)
-    {
-        $umkm = Umkm::with('category')->find($id);
-
-        if (!$umkm) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Data UMKM tidak ditemukan',
-                'data' => null
-            ], 404);
-        }
-
-        if ($umkm->image) {
-            $umkm->image = url(Storage::url($umkm->image));
-        }
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Detail data UMKM ditemukan',
-            'data' => [
-                'id' => $umkm->id,
-                'name' => $umkm->name,
-                'description' => $umkm->description,
-                'category' => $umkm->category,
-                'address' => $umkm->address,
-                'kecamatan' => $umkm->kecamatan,
-                'rating' => $umkm->rating,
-                'review_count' => $umkm->review_count,
-                'map_link' => $umkm->map_link,
-                'jam_buka' => $umkm->jam_buka,
-                'jam_tutup' => $umkm->jam_tutup,
-                'no_wa' => $umkm->no_wa,
-                'status' => $umkm->status, // ✅ tampilkan status
-                'image' => $umkm->image,
-                'created_at' => $umkm->created_at,
-                'updated_at' => $umkm->updated_at,
-            ]
-        ], 200);
-    }
-
+    /**
+     * Memperbarui data UMKM.
+     */
     public function update(Request $request, $id)
     {
         $umkm = Umkm::find($id);
@@ -137,25 +139,25 @@ class UmkmController extends Controller
         if (!$umkm) {
             return response()->json([
                 'status' => false,
-                'message' => 'Data UMKM tidak ditemukan',
+                'message' => 'UMKM tidak ditemukan',
                 'data' => null
             ], 404);
         }
 
+        // Daftar kecamatan sesuai enum di migrasi
+        $listKecamatan = ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'];
+
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|string|max:255',
+            'category_id' => 'sometimes|required|exists:categories,id', // <-- DITAMBAHKAN
+            'kecamatan' => ['sometimes', 'nullable', Rule::in($listKecamatan)], // <-- DITAMBAHKAN
+            'name' => 'sometimes|required|string|max:255',
+            'hero_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'hero_title' => 'nullable|string',
+            'hero_subtitle' => 'nullable|string',
             'description' => 'nullable|string',
-            'category_id' => 'sometimes|exists:categories,id',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'about' => 'nullable|string',
             'rating' => 'nullable|numeric|min:0|max:5',
-            'review_count' => 'nullable|integer|min:0',
-            'address' => 'nullable|string|max:255',
-            'kecamatan' => 'nullable|in:Kudus Kota,Jati,Bae,Mejobo,Undaan,Gebog,Dawe',
-            'map_link' => 'nullable|url|max:255',
-            'jam_buka' => 'nullable|date_format:H:i',
-            'jam_tutup' => 'nullable|date_format:H:i',
-            'no_wa' => 'nullable|string|min:10|max:20', 
-            'status' => 'nullable|in:active,inactive' // ✅ validasi status opsional
+            'status' => 'sometimes|in:active,inactive'
         ]);
 
         if ($validator->fails()) {
@@ -168,27 +170,49 @@ class UmkmController extends Controller
 
         $data = $validator->validated();
 
-        if ($request->hasFile('image')) {
-            if ($umkm->image && Storage::disk('public')->exists($umkm->image)) {
-                Storage::disk('public')->delete($umkm->image);
+        // Handle update slug jika nama berubah
+        if ($request->has('name') && $request->name !== $umkm->name) {
+            $slug = Str::slug($data['name']);
+            $count = 1;
+            // Pastikan slug unik, tapi abaikan ID saat ini
+            while (Umkm::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+                $slug = Str::slug($data['name']) . '-' . $count;
+                $count++;
             }
-            $path = $request->file('image')->store('uploads/umkm', 'public');
-            $data['image'] = $path;
+            $data['slug'] = $slug;
+        }
+
+        // Handle update gambar
+        if ($request->hasFile('hero_image')) {
+            // Hapus gambar lama jika ada
+            if ($umkm->hero_image && Storage::disk('public')->exists($umkm->hero_image)) {
+                Storage::disk('public')->delete($umkm->hero_image);
+            }
+
+            // Simpan gambar baru
+            $path = $request->file('hero_image')->store('uploads/umkms', 'public');
+            $data['hero_image'] = $path;
         }
 
         $umkm->update($data);
+        $umkm->refresh(); // Ambil data terbaru dari DB
+        $umkm->load('category'); // Load relasi kategori
 
-        if ($umkm->image) {
-            $umkm->image = url(Storage::url($umkm->image));
+        // Ubah path gambar menjadi URL lengkap untuk respons
+        if ($umkm->hero_image) {
+            $umkm->hero_image = url(Storage::url($umkm->hero_image));
         }
 
         return response()->json([
             'status' => true,
-            'message' => 'Data UMKM berhasil diperbarui',
+            'message' => 'UMKM berhasil diperbarui',
             'data' => $umkm
         ], 200);
     }
 
+    /**
+     * Menghapus UMKM (Soft Delete).
+     */
     public function destroy($id)
     {
         $umkm = Umkm::find($id);
@@ -196,58 +220,39 @@ class UmkmController extends Controller
         if (!$umkm) {
             return response()->json([
                 'status' => false,
-                'message' => 'Data UMKM tidak ditemukan',
+                'message' => 'UMKM tidak ditemukan',
                 'data' => null
             ], 404);
         }
+        
+        // Load kategori sebelum mengubah data
+        $umkm->load('category');
 
+        // Cek apakah sudah inactive
         if ($umkm->status === 'inactive') {
-            if ($umkm->image && !str_starts_with($umkm->image, 'http')) {
-                $umkm->image = asset('storage/' . $umkm->image);
+            if ($umkm->hero_image) {
+                $umkm->hero_image = url(Storage::url($umkm->hero_image));
             }
-
             return response()->json([
                 'status' => false,
-                'message' => 'Data UMKM sudah tidak aktif',
+                'message' => 'UMKM sudah tidak aktif',
                 'data' => $umkm
             ], 400);
         }
 
+        // Lakukan soft delete
         $umkm->status = 'inactive';
         $umkm->save();
+        $umkm->refresh();
 
-        if ($umkm->image && !str_starts_with($umkm->image, 'http')) {
-            $umkm->image = asset('storage/' . $umkm->image);
+        if ($umkm->hero_image) {
+            $umkm->hero_image = url(Storage::url($umkm->hero_image));
         }
 
         return response()->json([
             'status' => true,
-            'message' => 'Data UMKM berhasil dinonaktifkan',
+            'message' => 'UMKM berhasil dinonaktifkan',
             'data' => $umkm
-        ], 200);
-    }
-
-    public function countByKecamatan($kecamatan)
-    {
-        $validKecamatan = ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'];
-
-        if (!in_array($kecamatan, $validKecamatan)) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Nama kecamatan tidak valid',
-                'data' => null
-            ], 400);
-        }
-
-        $count = Umkm::where('kecamatan', $kecamatan)
-            ->where('status', 'active')
-            ->count();
-
-        return response()->json([
-            'status' => true,
-            'message' => "Jumlah UMKM di kecamatan {$kecamatan}",
-            'kecamatan' => $kecamatan,
-            'total_umkm' => $count
         ], 200);
     }
 }

@@ -6,27 +6,31 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('umkms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->string('image')->nullable();
-            $table->float('rating')->default(0);
-            $table->integer('review_count')->default(0);
-            $table->string('address')->nullable();
-            $table->enum('kecamatan', ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'])->nullable();
-            $table->string('map_link')->nullable(); 
-            $table->time('jam_buka')->nullable(); 
-            $table->time('jam_tutup')->nullable(); 
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->string('no_wa', 14);
+            $table->enum('kecamatan', ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'])->nullable(); // -> location (dari list)
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('hero_image')->nullable();
+            $table->text('hero_title')->nullable();
+            $table->text('hero_subtitle')->nullable();
+            $table->text('description')->nullable();
+            $table->text('about')->nullable();
+            $table->decimal('rating', 2, 1)->nullable(); 
+            $table->string('status')->default('active'); 
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('umkms');
