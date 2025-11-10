@@ -11,8 +11,10 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+           $baseUrl = 'foto_profil/';
             User::create([
             'name' => 'Admin UMKM Kudus',
+            'foto_profil' => $baseUrl . 'yusup.jpg',
             'email' => 'umkmkudus@gmail.com',
             'password' => Hash::make('adminumkm2025'),
             'created_at' => now(),

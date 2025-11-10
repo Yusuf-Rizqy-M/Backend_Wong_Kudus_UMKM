@@ -206,4 +206,69 @@ class ArticleController extends Controller
             'data' => $articles
         ], 200);
     }
+    /**
+     * Get detail artikel + kategori + related articles (untuk frontend)
+     */
+    public function showDetail($id)
+    {
+        $article = ArticleBlog::with('categoryBlog')
+            ->where('id', $id)
+            ->where('status', 'active')
+            ->first();
+
+        if (!$article) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Artikel tidak ditemukan atau tidak aktif.',
+                'data' => null
+            ], 404);
+        }
+
+        // Format image
+        if ($article->image) {
+            $article->image = url(Storage::url($article->image));
+        }
+
+        // Ambil nama kategori
+        $categoryName = $article->categoryBlog?->title ?? 'Lainnya';
+
+        // Ambil 3 artikel terkait (kategori sama, bukan artikel ini)
+        $relatedArticles = ArticleBlog::where('category_blog_id', $article->category_blog_id)
+            ->where('id', '!=', $article->id)
+            ->where('status', 'active')
+            ->inRandomOrder()
+            ->limit(3)
+            ->get()
+            ->map(function ($item) {
+                if ($item->image) {
+                    $item->image = url(Storage::url($item->image));
+                }
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'image' => $item->image,
+                    'author' => $item->author,
+                    'created_at' => $item->created_at,
+                    'category_blog_id' => $item->category_blog_id,
+                ];
+            });
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Detail artikel berhasil diambil.',
+            'data' => [
+                'article' => [
+                    'id' => $article->id,
+                    'title' => $article->title,
+                    'content' => $article->content,
+                    'image' => $article->image,
+                    'author' => $article->author,
+                    'created_at' => $article->created_at,
+                    'category' => $categoryName,
+                    'category_blog_id' => $article->category_blog_id,
+                ],
+                'related_articles' => $relatedArticles,
+            ]
+        ], 200);
+    }
 }
