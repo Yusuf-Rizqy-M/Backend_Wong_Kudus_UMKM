@@ -10,11 +10,13 @@ use App\Http\Controllers\API\ContactUmkmController;
 use App\Http\Controllers\API\CategoryBlogController;
 use App\Http\Controllers\API\RatingWebsiteController;
 use App\Http\Controllers\API\GaleriUmkmController;
-use App\Http\Controllers\API\MenuUmkmController;
 use App\Http\Controllers\API\KecamatanController;
-// Import Controller Baru
 use App\Http\Controllers\API\UmkmOpeningHourController;
 use App\Http\Controllers\API\UmkmListingController;
+// BARU: Import controller yang ditambahkan
+use App\Http\Controllers\API\UmkmMenuController;
+use App\Http\Controllers\API\UmkmLocationController;
+use App\Http\Controllers\API\UmkmContactController;
 
 
 // === PUBLIC ROUTES ===
@@ -33,10 +35,18 @@ Route::get('/galeri-umkm', [GaleriUmkmController::class, 'index']);
 Route::get('/galeri-umkm/{id}', [GaleriUmkmController::class, 'show']);
 Route::get('/galeri-umkm/umkm/{umkm_id}', [GaleriUmkmController::class, 'getByUmkmId']);
 
-// --- MENU UMKM ---
-Route::get('/menu-umkm', [MenuUmkmController::class, 'index']);
-Route::get('/menu-umkm/{id}', [MenuUmkmController::class, 'show']);
-Route::get('/menu-umkm/umkm/{umkm_id}', [MenuUmkmController::class, 'getByUmkmId']);
+// BARU: Route untuk Menu UMKM ---
+Route::get('/umkm-menu', [UmkmMenuController::class, 'index']);
+Route::get('/umkm-menu/{umkmMenu}', [UmkmMenuController::class, 'show']); // Menggunakan {umkmMenu} untuk Route Model Binding
+Route::get('/umkm-menu/umkm/{umkm_id}', [UmkmMenuController::class, 'getByUmkm']); // <-- BARIS INI DITAMBAHKAN
+
+// BARU: Route untuk Lokasi UMKM ---
+Route::get('/umkm-locations', [UmkmLocationController::class, 'index']); // Get semua lokasi
+Route::get('/umkm/{umkm}/location', [UmkmLocationController::class, 'show']); // Get lokasi spesifik by UMKM
+
+// BARU: Route untuk Kontak UMKM ---
+Route::get('/umkm-contact', [UmkmContactController::class, 'index']); // Get semua kontak
+Route::get('/umkm/{umkm}/contact', [UmkmContactController::class, 'show']); // Get kontak spesifik by UMKM
 
 // --- JAM OPERASIONAL UMKM (BARU) ---
 Route::get('/umkm-hours', [UmkmOpeningHourController::class, 'index']);
@@ -108,18 +118,34 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/galeri-umkm/{id}', [GaleriUmkmController::class, 'update']);
     Route::delete('/galeri-umkm/{id}', [GaleriUmkmController::class, 'destroy']);
     
-    // --- MENU UMKM ---
-    Route::post('/menu-umkm', [MenuUmkmController::class, 'store']);
-    Route::put('/menu-umkm/{id}', [MenuUmkmController::class, 'update']);
-    Route::delete('/menu-umkm/{id}', [MenuUmkmController::class, 'destroy']);
 
     // === BARU DITAMBAHKAN ===
 
+    // --- JAM OPERASIONAL ---
     Route::post('/umkm-hours', [UmkmOpeningHourController::class, 'store']);
     Route::put('/umkm-hours/{id}', [UmkmOpeningHourController::class, 'update']);
     Route::delete('/umkm-hours/{id}', [UmkmOpeningHourController::class, 'destroy']);
 
+    // --- LISTING ---
     Route::post('/umkm-listings', [UmkmListingController::class, 'store']);
     Route::put('/umkm-listings/{id}', [UmkmListingController::class, 'update']);
     Route::delete('/umkm-listings/{id}', [UmkmListingController::class, 'destroy']);
+    
+    // BARU: Route untuk Menu UMKM ---
+    Route::post('/umkm-menu', [UmkmMenuController::class, 'store']);
+    // Catatan: Jika update mengirim file, gunakan POST bukan PUT, atau pastikan client Anda mendukung PUT dengan multipart/form-data
+    Route::put('/umkm-menu/{umkmMenu}', [UmkmMenuController::class, 'update']); // Menggunakan {umkmMenu} untuk Route Model Binding
+    Route::delete('/umkm-menu/{umkmMenu}', [UmkmMenuController::class, 'destroy']); // Menggunakan {umkmMenu}
+
+    // BARU: Route untuk Lokasi UMKM ---
+    Route::post('/umkm-locations', [UmkmLocationController::class, 'store']); 
+    Route::put('/umkm/{umkm}/location', [UmkmLocationController::class, 'update']); // Update/create lokasi by UMKM
+    Route::delete('/umkm-locations/{umkmLocation}', [UmkmLocationController::class, 'destroy']); // Hapus by ID lokasi
+    Route::put('/umkm-locations/{id}/activate', [UmkmLocationController::class, 'activate']); // <-- BARIS INI DITAMBAHKAN
+
+    // BARU: Route untuk Kontak UMKM ---
+    Route::post('/umkm-contact', [UmkmContactController::class, 'store']);
+    Route::put('/umkm/{umkm}/contact', [UmkmContactController::class, 'update']); // Update/create kontak by UMKM
+    Route::delete('/umkm-contact/{umkmContact}', [UmkmContactController::class, 'destroy']); // Hapus by ID kontak
+    Route::put('/umkm-contact/{id}/activate', [UmkmContactController::class, 'activate']); // <-- BARIS INI DITAMBAHKAN
 });
