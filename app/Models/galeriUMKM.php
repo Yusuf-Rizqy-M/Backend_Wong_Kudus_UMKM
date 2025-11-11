@@ -11,7 +11,7 @@ class GaleriUmkm extends Model
 
     protected $table = 'galeri_umkms';
 
-    protected $fillable = ['umkm_id','name','image','status',];
+    protected $fillable = ['umkm_id','image','status',];
 
     /**
      * Relasi ke model Umkm (many-to-one)
