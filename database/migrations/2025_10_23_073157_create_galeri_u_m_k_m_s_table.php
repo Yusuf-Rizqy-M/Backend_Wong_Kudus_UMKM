@@ -14,7 +14,7 @@ return new class extends Migration
                   ->constrained('umkms')
                   ->onDelete('cascade');
             $table->string('image');
-            $table->string('status')->default('active'); // <-- DITAMBAHKAN
+            $table->string('status')->default('active'); 
             $table->timestamps();
         });
     }
