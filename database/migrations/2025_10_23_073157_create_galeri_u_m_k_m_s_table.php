@@ -10,10 +10,11 @@ return new class extends Migration
     {
         Schema::create('galeri_umkms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('umkm_id')->constrained('umkms')->onDelete('cascade');
-            $table->string('name')->nullable();
+            $table->foreignId('umkm_id')
+                  ->constrained('umkms')
+                  ->onDelete('cascade');
             $table->string('image');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('status')->default('active'); // <-- DITAMBAHKAN
             $table->timestamps();
         });
     }
