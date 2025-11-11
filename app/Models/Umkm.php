@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany; // <-- TAMBAHKAN INI
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Umkm extends Model
 {
@@ -43,5 +45,21 @@ class Umkm extends Model
     public function listing()
     {
         return $this->hasOne(UmkmListing::class, 'umkm_id');
+    }
+    public function location(): HasOne
+    {
+        return $this->hasOne(UmkmLocation::class, 'umkm_id');
+    }
+
+    // Relasi One-to-One ke Contact
+    public function contact(): HasOne
+    {
+        return $this->hasOne(UmkmContact::class, 'umkm_id');
+    }
+
+    // Relasi One-to-Many ke Menu
+    public function menus(): HasMany
+    {
+        return $this->hasMany(UmkmMenu::class, 'umkm_id');
     }
 }
