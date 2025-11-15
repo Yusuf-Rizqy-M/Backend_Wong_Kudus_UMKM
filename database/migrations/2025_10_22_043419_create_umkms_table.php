@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('umkms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->enum('kecamatan', ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'])->nullable(); // -> location (dari list)
+            $table->enum('kecamatan', ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe','Jekulo', 'Kaliwungu'])->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('hero_image')->nullable();

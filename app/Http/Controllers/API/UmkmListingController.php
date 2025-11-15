@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\UmkmListing;
+use App\Models\Umkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +47,6 @@ class UmkmListingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'umkm_id' harus unik di tabel 'umkm_listings'
             'umkm_id' => 'required|exists:umkms,id|unique:umkm_listings,umkm_id',
             'category' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
@@ -64,11 +64,24 @@ class UmkmListingController extends Controller
         }
 
         $data = $validator->validated();
+
+        // === VALIDASI: location HARUS SAMA dengan kecamatan di UMKM ===
+        $umkm = Umkm::find($data['umkm_id']);
+        if ($umkm && $data['location'] && $data['location'] !== $umkm->kecamatan) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi gagal',
+                'data' => [
+                    'location' => ['Lokasi di listing harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan]
+                ]
+            ], 422);
+        }
+
         $data['status'] = 'active';
 
         // Handle upload gambar
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads/listings', 'public');
+            $path = $request->file('image')->store('uploads/umkm', 'public');
             $data['image'] = $path;
         }
 
@@ -117,7 +130,6 @@ class UmkmListingController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            // Validasi unik, tapi abaikan ID umkm_id saat ini
             'umkm_id' => 'sometimes|required|exists:umkms,id|unique:umkm_listings,umkm_id,' . $listing->id,
             'category' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
@@ -137,14 +149,27 @@ class UmkmListingController extends Controller
 
         $data = $validator->validated();
 
+        // === VALIDASI: Jika location diisi, harus sama dengan kecamatan UMKM ===
+        if (isset($data['location'])) {
+            $umkmId = $data['umkm_id'] ?? $listing->umkm_id;
+            $umkm = Umkm::find($umkmId);
+            if ($umkm && $data['location'] && $data['location'] !== $umkm->kecamatan) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi gagal',
+                    'data' => [
+                        'location' => ['Lokasi di listing harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan]
+                    ]
+                ], 422);
+            }
+        }
+
         // Handle update gambar
         if ($request->hasFile('image')) {
-            // Hapus gambar lama
             if ($listing->image && Storage::disk('public')->exists($listing->image)) {
                 Storage::disk('public')->delete($listing->image);
             }
-            // Simpan gambar baru
-            $path = $request->file('image')->store('uploads/listings', 'public');
+            $path = $request->file('image')->store('uploads/umkm', 'public');
             $data['image'] = $path;
         }
 

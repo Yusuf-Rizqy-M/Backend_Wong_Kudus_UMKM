@@ -11,6 +11,21 @@ use Illuminate\Support\Facades\Storage;
 
 class GaleriUmkmController extends Controller
 {
+    public function trash()
+{
+    $galeries = GaleriUmkm::where('status', 'inactive')
+        ->orderBy('updated_at', 'desc')
+        ->get()
+        ->map(function ($galeri) {
+            return $this->getImageUrl($galeri);
+        });
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Daftar galeri di sampah berhasil diambil',
+        'data' => $galeries
+    ], 200);
+}
     /**
      * Helper untuk mengubah path gambar menjadi URL
      */
@@ -64,7 +79,7 @@ class GaleriUmkmController extends Controller
 
         // Handle upload gambar
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads/galeri', 'public');
+            $path = $request->file('image')->store('uploads/umkm', 'public');
             $data['image'] = $path;
         }
 
@@ -137,7 +152,7 @@ class GaleriUmkmController extends Controller
                 Storage::disk('public')->delete($galeri->image);
             }
             // Simpan gambar baru
-            $path = $request->file('image')->store('uploads/galeri', 'public');
+            $path = $request->file('image')->store('uploads/umkm', 'public');
             $data['image'] = $path;
         }
 
