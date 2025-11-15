@@ -67,10 +67,60 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.7826663,110.8483528&hl=id&z=15&output=embed',
                 ],
             ],
+            [
+                'id' => 6,
+                'slug' => 'resto-mvr-kudus',
+                'location' => [
+                    'address' => 'Kayuapu Kulon, Gondangmanis, Kudus',
+                    'fullAddress' => 'Jl. Lkr. Utara Umk No.Utara, Kayuapu Kulon, Gondangmanis, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59327',
+                    'mapsUrl' => 'https://maps.app.goo.gl/Qx8qinbztc2nCYP78',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7804136,110.8696728&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 7,
+                'slug' => 'vjo-cafe-bistro',
+                'location' => [
+                    'address' => 'Kayuapu Kulon, Gondangmanis, Kudus',
+                    'fullAddress' => 'Jl. Permata Kav., Kayuapu Kulon, Gondangmanis, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59327',
+                    'mapsUrl' => 'https://maps.app.goo.gl/vR6jvMG1dUXZiA4Z8',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7905626,110.8661988&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 8,
+                'slug' => 'toko-al-maira',
+                'location' => [
+                    'address' => 'Ngembal Rejo, Ngembalrejo, Kudus',
+                    'fullAddress' => 'Ngembal Rejo, Ngembalrejo, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59322',
+                    'mapsUrl' => 'https://maps.app.goo.gl/hibmYHSqD5Zk8BN46',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7918289,110.8784789&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 9,
+                'slug' => 'siskanuna-boutique',
+                'location' => [
+                    'address' => 'Kepyar, Dersalam, Kudus',
+                    'fullAddress' => 'Jl. Kampus UMK Kapling Segeran No.3, Kepyar, Dersalam, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59321',
+                    'mapsUrl' => 'https://maps.app.goo.gl/CiKBLYS2JEE1zver9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7945419,110.8664624&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 10,
+                'slug' => 'terebatik',
+                'location' => [
+                    'address' => 'Kayuapu Kulon, Gondangmanis, Kudus',
+                    'fullAddress' => 'Jl. Lkr. Utara Umk No.250, Kayuapu Kulon, Gondangmanis, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59327',
+                    'mapsUrl' => 'https://maps.app.goo.gl/A6VKPguSi9g3Fr3s8',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7753933,110.8660364&hl=id&z=15&output=embed',
+                ],
+            ],
 
             // DAWE
             [
-                'id' => 6,
+                'id' => 11,
                 'slug' => 'swike-dawe-restaurant',
                 'location' => [
                     'address' => 'Dawe, Kudus',
@@ -80,7 +130,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 7,
+                'id' => 12,
                 'slug' => 'wekate-gank',
                 'location' => [
                     'address' => 'Kudus, Jawa Tengah, Indonesia',
@@ -90,7 +140,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 8,
+                'id' => 13,
                 'slug' => 'rumah-makan-mak-kiyem',
                 'location' => [
                     'address' => 'Cendono Wetan, Kudus',
@@ -100,7 +150,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 9,
+                'id' => 14,
                 'slug' => 'jasa-angkut-dan-pasir-bata-merah-jumbo',
                 'location' => [
                     'address' => 'Kutatan, Lau, Kudus',
@@ -110,7 +160,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 10,
+                'id' => 15,
                 'slug' => 'ayam-geprek-sai',
                 'location' => [
                     'address' => 'Cendono Wetan, Cendono, Kudus',
@@ -119,10 +169,60 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.7439998,110.8634183&hl=id&z=15&output=embed',
                 ],
             ],
+            [
+                'id' => 16,
+                'slug' => 'warung-makan-sendang-mulia',
+                'location' => [
+                    'address' => 'Jl. Raya Kudus, Colo, Kudus',
+                    'fullAddress' => 'Jl. Raya Kudus - Colo, Dawe, Cendono, Kudus, Kabupaten Kudus, Jawa Tengah 59353',
+                    'mapsUrl' => 'https://maps.app.goo.gl/ULwtaQN7BWRcuMzL8',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7407578,110.8645519&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 17,
+                'slug' => 'toko-adib-azka',
+                'location' => [
+                    'address' => 'Jl. Dawe Puyoh, Madu, Cendono, Kudus',
+                    'fullAddress' => '7V86+MH3, Jl. Dawe Puyoh, Madu, Cendono, Kec. Dawe, Kabupaten Kudus, Jawa Tengah 59353',
+                    'mapsUrl' => 'https://maps.app.goo.gl/EHiDEoXxq29Cif5F9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7333625,110.8614316&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 18,
+                'slug' => 'toko-sri-dawe',
+                'location' => [
+                    'address' => 'Jl. Dawe - Gebog, Madu, Cendono, Kudus',
+                    'fullAddress' => '7V77+H5G, Jl. Dawe - Gebog, Madu, Cendono, Kec. Dawe, Kabupaten Kudus, Jawa Tengah 59353',
+                    'mapsUrl' => 'https://maps.app.goo.gl/L5VbDsE3YSreAL5E7',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7360598,110.8629559&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 19,
+                'slug' => 'arfan-outfit-kudus',
+                'location' => [
+                    'address' => 'Cendono Wetan, Cendono, Kudus',
+                    'fullAddress' => 'Dukuh Kawaan No.RT.02/RW.8, Cendono Wetan, Cendono, Kec. Dawe, Kabupaten Kudus, Jawa Tengah 59353',
+                    'mapsUrl' => 'https://maps.app.goo.gl/8wK9Z1e5Vr4A4sFL8',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7455582,110.8593985&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 20,
+                'slug' => 'dinda-store-ds',
+                'location' => [
+                    'address' => 'Madu, Cendono, Kudus',
+                    'fullAddress' => '7V57+HQP, Madu, Cendono, Kec. Dawe, Kabupaten Kudus, Jawa Tengah 59353',
+                    'mapsUrl' => 'https://maps.app.goo.gl/W6KEczhYtsvqniU7A',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7410438,110.8644447&hl=id&z=15&output=embed',
+                ],
+            ],
 
             // GEBOG
             [
-                'id' => 11,
+                'id' => 21,
                 'slug' => 'warung-makan-mbah-sapar',
                 'location' => [
                     'address' => 'Beru, Kudus',
@@ -132,7 +232,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 12,
+                'id' => 22,
                 'slug' => 'nasi-uduk-dan-nasi-kuning-gang-satu',
                 'location' => [
                     'address' => 'Jl. Raya Jurang Gang 1, Kudus',
@@ -142,7 +242,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 13,
+                'id' => 23,
                 'slug' => 'sari-rasa-bakso-malvinas',
                 'location' => [
                     'address' => 'Besito Kulon, Besito, Kudus',
@@ -152,7 +252,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 14,
+                'id' => 24,
                 'slug' => 'warung-makan-mak-ru',
                 'location' => [
                     'address' => 'Besito Kulon, Besito, Kudus',
@@ -162,7 +262,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 15,
+                'id' => 25,
                 'slug' => 'kasehito-works',
                 'location' => [
                     'address' => 'Besito Kulon, Besito, Kudus',
@@ -171,10 +271,68 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.7525493,110.8434053&hl=id&z=15&output=embed',
                 ],
             ],
-
-            // JATI
             [
-                'id' => 16,
+                'id' => 26,
+                'slug' => 'basina-food',
+                'location' => [
+                    'address' => 'Besito Kulon, Besito, Kudus',
+                    'fullAddress' => 'Jl. Bae-Besito No.82, Besito Kulon, Besito, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333',
+                    'mapsUrl' => 'https://maps.app.goo.gl/yJafRVMStEDkHr2WA',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.754658,110.8432598&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 27,
+                'slug' => 'campaign-coffee',
+                'location' => [
+                    'address' => 'Besito Kulon, Besito, Kudus',
+                    'fullAddress' => 'Jl. Besito - Gebog No.80-516, Besito Kulon, Besito, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333',
+                    'mapsUrl' => 'https://maps.app.goo.gl/pbjVtizNTBJtTfF29',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7538461,110.842404&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 28,
+                'slug' => 'toko-tna-jaya',
+                'location' => [
+                    'address' => 'Karang Rejosari, Jurang, Gebog, Kudus',
+                    'fullAddress' => 'Jln.Raya Pasar Pon No.8 Teloyo, Karang Rejosari, Jurang, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59534',
+                    'mapsUrl' => 'https://maps.app.goo.gl/M5NYKMMuk82wp8TC6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.738939,110.8475491&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 29,
+                'slug' => 'toko-teguh-sudarsono',
+                'location' => [
+                    'address' => 'Sendang, Klontong, Kedungsari, Gebog, Kudus',
+                    'fullAddress' => '7RCQ+FHF, Unnamed Road, Sendang, Klontong, Kedungsari, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333',
+                    'mapsUrl' => 'https://maps.app.goo.gl/kLNwWUCdDHjMk21h6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7288052,110.838917&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 30,
+                'slug' => 'nilna-dion-collection',
+                'location' => [
+                    'address' => 'Bonalas, Besito, Kudus',
+                    'fullAddress' => '6RWM+FF4, Jl. Raya Tulis - Prambatan, Bonalas, Besito, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333',
+                    'mapsUrl' => 'https://maps.app.goo.gl/kGpcz3gCbyVy2nvo7',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7538742,110.8336916&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 31,
+                'slug' => 'toko-kastimah',
+                'location' => [
+                    'address' => 'Menawan, Besito, Kudus',
+                    'fullAddress' => 'Jln, Menawan, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333',
+                    'mapsUrl' => 'https://maps.app.goo.gl/dxjAfcpW1KTwqKYD9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7067356,110.8498584&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 32,
                 'slug' => 'cakrawala-sego-sambel',
                 'location' => [
                     'address' => 'Jl. Jend. Ahmad Yani No.1, Kudus',
@@ -184,7 +342,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 17,
+                'id' => 33,
                 'slug' => 'nasi-opor-sunggingan',
                 'location' => [
                     'address' => 'Plosokrajan, Ploso, Kudus',
@@ -194,7 +352,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 18,
+                'id' => 34,
                 'slug' => 'warung-enthog-pak-badi',
                 'location' => [
                     'address' => 'Murai, Pasuruhan Lor, Kudus',
@@ -204,7 +362,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 19,
+                'id' => 35,
                 'slug' => 'jasa-powder-coating-dan-platting-kudus',
                 'location' => [
                     'address' => 'Plosokrajan, Ploso, Kudus',
@@ -214,7 +372,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 20,
+                'id' => 36,
                 'slug' => 'kedai-es-bang-maman',
                 'location' => [
                     'address' => 'Plosokrajan, Ploso, Kudus',
@@ -223,10 +381,48 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8143004,110.8310655&hl=id&z=15&output=embed',
                 ],
             ],
-
-            // JEKULO
             [
-                'id' => 21,
+                'id' => 37,
+                'slug' => 'gravitasi-teras-muria',
+                'location' => [
+                    'address' => 'Pasuruhan Lor, Kudus',
+                    'fullAddress' => 'Jl. Pasuruhan Lor No.568, Pasuruhan Lor, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59349',
+                    'mapsUrl' => 'https://maps.app.goo.gl/xjzQ1LrjRg2s3qgw6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8163308,110.8236264&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 38,
+                'slug' => 'toko-kliwon',
+                'location' => [
+                    'address' => 'Pasuruhan Lor, Kudus',
+                    'fullAddress' => '5RJG+7C8, Jl. Kebunsawah, Pasuruhan Lor, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59349',
+                    'mapsUrl' => 'https://maps.app.goo.gl/QEQoBGhkSZ7Jq1Z56',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8193385,110.8260639&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 39,
+                'slug' => 'toko-happy-kids',
+                'location' => [
+                    'address' => 'Plosokrajan, Ploso, Kudus',
+                    'fullAddress' => 'Jl. Mayor H. Basuno No.38, Plosokrajan, Ploso, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59348',
+                    'mapsUrl' => 'https://maps.app.goo.gl/q6NQVBFhBiAcidXz6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8158025,110.8301664&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 40,
+                'slug' => 'nobby-kudus-extension',
+                'location' => [
+                    'address' => 'Getas, Getas Pejaten, Kudus',
+                    'fullAddress' => 'Getas, Getas Pejaten, Kec. Jati, Kabupaten Kudus, Jawa Tengah',
+                    'mapsUrl' => 'https://maps.app.goo.gl/p2xWRsTNQBxQrFnm6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8176431,110.8377241&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 41,
                 'slug' => 'jus-pojokan',
                 'location' => [
                     'address' => 'Tambak, Jekulo, Kudus',
@@ -236,7 +432,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 22,
+                'id' => 42,
                 'slug' => 'kedai-twins-seblak-bandung-juice-jekulo',
                 'location' => [
                     'address' => 'Karang, Jekulo, Kudus',
@@ -245,8 +441,9 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8099173,110.9227112&hl=id&z=17&output=embed',
                 ],
             ],
+
             [
-                'id' => 23,
+                'id' => 43,
                 'slug' => 'lentog-tanjung-bang-saiful',
                 'location' => [
                     'address' => 'Karang, Jekulo, Kudus',
@@ -256,7 +453,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 24,
+                'id' => 44,
                 'slug' => 'berkah-es-buah',
                 'location' => [
                     'address' => 'Kalidoro Lor, Bulungcangkring, Kudus',
@@ -265,21 +462,58 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8072038,110.918911&hl=id&z=15&output=embed',
                 ],
             ],
-
-                // ID 25 - 34: Kosong (tambahkan nanti jika ada)
-// KALIWUNGU & KOTA KUDUS (ID 25 - 34)
             [
-                'id' => 25,
+                'id' => 45,
                 'slug' => 'warnet-jaya-sentosa',
                 'location' => [
                     'address' => 'Karang, Jekulo,, Kudus',
                     'fullAddress' => '5WRC+7XP, Desa Jekulo Dukuh Jekulo, Karang, Jekulo, Kec. Jekulo, Kabupaten Kudus, Jawa Tengah 59382',
                     'mapsUrl' => 'https://maps.app.goo.gl/s2JV7E3gaEUHFxsy5',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.8092817,110.92246&hl=id&z=17&output=embed',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8092817,110.92246&hl=id&z=15&output=embed',
                 ],
             ],
             [
-                'id' => 26,
+                'id' => 46,
+                'slug' => 'warung-mie-dadat',
+                'location' => [
+                    'address' => 'Tambak, Jekulo,, Kudus',
+                    'fullAddress' => 'Tambak, Jekulo, Kec. Jekulo, Kabupaten Kudus, Jawa Tengah 59382',
+                    'mapsUrl' => 'https://maps.app.goo.gl/2LthFjXMqxyzKfM48',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8055015,110.9159331&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 47,
+                'slug' => 'toko-risfan-snack',
+                'location' => [
+                    'address' => 'Jekulo, Klaling,, Kudus',
+                    'fullAddress' => 'Jekulo, Klaling, Kec. Jekulo, Kabupaten Kudus, Jawa Tengah 59382',
+                    'mapsUrl' => 'https://maps.app.goo.gl/UP4AuScYCa4M6dK29',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8070603,110.9248429&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 48,
+                'slug' => 'js-muslim-collection',
+                'location' => [
+                    'address' => 'Pulutan, Jekulo, Kudus',
+                    'fullAddress' => 'Jl. Hastrodirono No.50, RT.04/RW.06, Pulutan, Jekulo, Kec. Jekulo, Kabupaten Kudus, Jawa Tengah 59382',
+                    'mapsUrl' => 'https://maps.app.goo.gl/m8jvwbDuvw4zVJhb9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8145268,110.9181404&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 49,
+                'slug' => 'kios-hjh',
+                'location' => [
+                    'address' => 'Karang, Jekulo, Kudus',
+                    'fullAddress' => 'Jl. Kudus - Pati No.145, Karang, Jekulo, Kec. Jekulo, Kabupaten Kudus, Jawa Tengah 59382',
+                    'mapsUrl' => 'https://maps.app.goo.gl/m8jvwbDuvw4zVJhb9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8077521,110.9200351&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 50,
                 'slug' => 'jahe-rempah-leggit',
                 'location' => [
                     'address' => 'Madaran, Mijen, Kudus',
@@ -289,7 +523,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 27,
+                'id' => 51,
                 'slug' => 'warung-makan-bu-carik',
                 'location' => [
                     'address' => 'Area Sawah, Sidorekso, Kudus',
@@ -299,7 +533,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 28,
+                'id' => 52,
                 'slug' => 'tehatea-indonesia',
                 'location' => [
                     'address' => 'Kedungdowo, Kabupaten Kudus',
@@ -309,7 +543,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 29,
+                'id' => 53,
                 'slug' => 'warung-makan-2-putra',
                 'location' => [
                     'address' => 'Kedungdowo, Kudus',
@@ -319,7 +553,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 30,
+                'id' => 54,
                 'slug' => 'jasa-angkut-barang',
                 'location' => [
                     'address' => 'Setro, Setrokalangan, Kudus',
@@ -328,8 +562,59 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8066691,110.7843391&hl=id&z=15&output=embed',
                 ],
             ],
+
             [
-                'id' => 31,
+                'id' => 55,
+                'slug' => 'sego-sambel-lek-kas2',
+                'location' => [
+                    'address' => 'Kedungdowo, Kudus',
+                    'fullAddress' => '6R32+987, Kedungdowo, Kec. Kaliwungu, Kabupaten Kudus, Jawa Tengah 59332',
+                    'mapsUrl' => 'https://maps.app.goo.gl/ngz4L8VUNk6AJW6A9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.796607,110.8009774&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 56,
+                'slug' => 'toko-jamaah',
+                'location' => [
+                    'address' => 'Jalan, Winong, Kudus',
+                    'fullAddress' => '6QCR+G39, Jalan, Winong, Kaliwungu, Kudus Regency, Central Java 59332',
+                    'mapsUrl' => 'https://maps.app.goo.gl/EQWarx4Kj8qRdgGq9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7787026,110.7902339&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 57,
+                'slug' => 'mm-amanah',
+                'location' => [
+                    'address' => 'Mijen, Kudus',
+                    'fullAddress' => 'Dukuh Demangan, Jl. Raya Kudus - Jepara No.KM-6, RT.09/RW.06, Mijen, Kec. Kaliwungu, Kabupaten Kudus, Jawa Tengah 59332',
+                    'mapsUrl' => 'https://maps.app.goo.gl/5S4gkDihkRGTiZLz9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7892015,110.7941047&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 58,
+                'slug' => 'toko-van-helen',
+                'location' => [
+                    'address' => 'Kedungdowo, Kaliwungu, Kudus',
+                    'fullAddress' => '6R32+6P2, Kedungdowo, Kec. Kaliwungu, Kabupaten Kudus, Jawa Tengah 59332',
+                    'mapsUrl' => 'https://maps.app.goo.gl/KicYoZSUDVdqBBBDA',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7969869,110.801753&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 59,
+                'slug' => 'lina-family',
+                'location' => [
+                    'address' => 'Madaran, Mijen, Kudus',
+                    'fullAddress' => 'Jl. Raya Kudus - Jepara No.Km. 5, Madaran, Mijen, Kec. Kaliwungu, Kabupaten Kudus, Jawa Tengah 59332',
+                    'mapsUrl' => 'https://maps.app.goo.gl/piTqSMQqSr23UbLQ9',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.7921879,110.7955317&hl=id&z=17&output=embed',
+                ],
+            ],
+            [
+                'id' => 60,
                 'slug' => 'susu-moeria',
                 'location' => [
                     'address' => 'Jl. Pemuda No.64, Magersari, Panjunan, Kudus',
@@ -339,17 +624,17 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 32,
+                'id' => 61,
                 'slug' => 'ramboo-chicken',
                 'location' => [
-                    'address' => 'Jl. KH Moh. Arwani, Kudus',
+                    'address' => 'Jl. Sunan Muria No.21, Kudus',
                     'fullAddress' => 'Jl. KH Moh. Arwani, Pejaten, Krandon, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59314',
                     'mapsUrl' => 'https://maps.app.goo.gl/xVjQFurMT4EqQVaw6',
                     'embedUrl' => 'https://www.google.com/maps?q=-6.792574,110.8408274&hl=id&z=15&output=embed',
                 ],
             ],
             [
-                'id' => 33,
+                'id' => 62,
                 'slug' => 'es-gempol-pak-masykur',
                 'location' => [
                     'address' => 'Magersari, Panjunan, Kudus',
@@ -359,7 +644,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 34,
+                'id' => 63,
                 'slug' => 'sultan-barber-top',
                 'location' => [
                     'address' => 'Jl. Pemuda No.56, Kudus',
@@ -368,9 +653,8 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8092534,110.8438943&hl=id&z=16&output=embed',
                 ],
             ],
-            // KOTA KUDUS
             [
-                'id' => 35,
+                'id' => 64,
                 'slug' => 'soto-kudus-bu-jatmi',
                 'location' => [
                     'address' => 'Jl. Kyai H. Wahid Hasyim No.43, Kudus',
@@ -379,10 +663,48 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8111989,110.83808&hl=id&z=15&output=embed',
                 ],
             ],
-
-            // MEJOBO
             [
-                'id' => 36,
+                'id' => 65,
+                'slug' => 'treend-steak-kudus',
+                'location' => [
+                    'address' => 'Jl. Ganesha Raya No.2, Purwosari, Kudus',
+                    'fullAddress' => 'Jl. Ganesha Raya No.2, Purwosari, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59316',
+                    'mapsUrl' => 'https://maps.app.goo.gl/uT2SPtZR9objQjEn7',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.803329,110.8261252&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 66,
+                'slug' => 'larees-jaya-electronics',
+                'location' => [
+                    'address' => 'Jl. Sunan Kudus, Kudus, Demaan, Kudus',
+                    'fullAddress' => 'Jl. Sunan Kudus, Kudus, Demaan, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59313',
+                    'mapsUrl' => 'https://maps.app.goo.gl/NJvA9WyUJWy2BfRdA',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8077597,110.8395403&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 67,
+                'slug' => 'es-coklat-cokot-kudus',
+                'location' => [
+                    'address' => 'Pejaten, Langgardalem, Kudus',
+                    'fullAddress' => 'Jl. Kyai Noorbadri Syahid, Pejaten, Langgardalem, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah',
+                    'mapsUrl' => 'https://maps.app.goo.gl/SSaBMBhcWiy7Fddw5',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8056922,110.8357389&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 68,
+                'slug' => 'richie-store-kudus',
+                'location' => [
+                    'address' => 'Jl. Sunan Muria No.4, Barongan, Kudus',
+                    'fullAddress' => 'Jl. Sunan Muria No.4, Barongan, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59313',
+                    'mapsUrl' => 'https://maps.app.goo.gl/qqkTf71a1vBUvoYq6',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8062037,110.8431931&hl=id&z=15&output=embed',
+                ],
+            ],
+            [
+                'id' => 69,
                 'slug' => 'xgam-tech',
                 'location' => [
                     'address' => 'Pendem Kulon, Jepang, Kudus',
@@ -392,7 +714,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 37,
+                'id' => 70,
                 'slug' => 'jasa-las-dan-bubut-mulyo-rejo',
                 'location' => [
                     'address' => 'Jln.Raya 7km Rau, Kalangan, Tenggeles, Kudus',
@@ -402,7 +724,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 38,
+                'id' => 71,
                 'slug' => 'putra-kalimosodo',
                 'location' => [
                     'address' => 'Gg. Bhakti No.1, Gulang Kulon, Kudus',
@@ -412,7 +734,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 39,
+                'id' => 72,
                 'slug' => 'ikan-bakar-nasuky-mubarok-jepang',
                 'location' => [
                     'address' => 'Jepang, Kudus',
@@ -422,7 +744,7 @@ class UmkmLocationSeeder extends Seeder
                 ],
             ],
             [
-                'id' => 40,
+                'id' => 73,
                 'slug' => 'rm-bu-sarah',
                 'location' => [
                     'address' => 'Jl. Lingkar Timur, Jepang, Kudus',
@@ -431,59 +753,139 @@ class UmkmLocationSeeder extends Seeder
                     'embedUrl' => 'https://www.google.com/maps?q=-6.8243528,110.8756417&hl=id&z=15&output=embed',
                 ],
             ],
-
-            // UNDAAN
             [
-                'id' => 41,
-                'slug' => 'queen-seblak-prasmanan',
+                'id' => 74,
+                'slug' => 'sate-kambing-pak-brewok',
                 'location' => [
-                    'address' => 'Kampek Lor, Kalirejo, Kudus',
-                    'fullAddress' => '3QCR+R9R, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
-                    'mapsUrl' => 'https://maps.app.goo.gl/MLtSm3m9YzNcH6xdA',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.9278993,110.7909045&hl=id&z=15&output=embed',
+                    'address' => 'Jl. Budi Utomo No.158, Pekeng, Gulang',
+                    'fullAddress' => 'Jl. Budi Utomo No.158, Pekeng, Gulang, Kec. Mejobo, Kabupaten Kudus, Jawa Tengah 59381',
+                    'mapsUrl' => 'https://maps.app.goo.gl/Zigj7mhWSbVb673W8',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.832874,110.8652271&hl=id&z=15&output=embed',
                 ],
             ],
             [
-                'id' => 42,
-                'slug' => 'ayam-geprek-mak-ginting',
+                'id' => 75,
+                'slug' => 'loh-jinawi',
                 'location' => [
-                    'address' => 'Gg. Manggis, Kampek Lor, Kalirejo, Kudus',
-                    'fullAddress' => '3QCR+H6H, Gg. Manggis, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
-                    'mapsUrl' => 'https://maps.app.goo.gl/qFtBBS2GG2uW28Bt5',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.9285735,110.7906047&hl=id&z=15&output=embed',
+                    'address' => 'Bancak, Payaman Kudus',
+                    'fullAddress' => '5V6F+W2X, Bancak, Payaman, Kec. Mejobo, Kabupaten Kudus, Jawa Tengah 59381',
+                    'mapsUrl' => 'https://maps.app.goo.gl/f7UHSCHhTrWC2Kjx5',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.8376295,110.8726151&hl=id&z=15&output=embed',
                 ],
             ],
             [
-                'id' => 43,
-                'slug' => 'warung-sate-dan-gule-pak-sugiyo',
+                'id' => 76,
+                'slug' => 'toko-auralia',
                 'location' => [
-                    'address' => 'Jl. Babalan - Prawoto, Kampek Lor, Kudus',
-                    'fullAddress' => '3QCR+95C, Jl. Babalan - Prawoto, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
-                    'mapsUrl' => 'https://maps.app.goo.gl/WkJAj3Ka8ZGoC7Wu5',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.9290637,110.790406&hl=id&z=15&output=embed',
+                    'address' => 'Pendem Kulon, Jepang, Kudus',
+                    'fullAddress' => 'Pendem Kulon, Jepang, Kec. Mejobo, Kabupaten Kudus, Jawa Tengah 59381',
+                    'mapsUrl' => 'https://maps.app.goo.gl/U5pSxKWHwwZKqAfk7',
+                    'embedUrl' => 'https://www.google.com/maps?q=-6.82967,110.86641&hl=id&z=15&output=embed',
                 ],
             ],
-            [
-                'id' => 44,
-                'slug' => 'mj-teknik',
-                'location' => [
-                    'address' => 'Kampek Lor, Kalirejo, Kudus',
-                    'fullAddress' => '3QFP+5R4, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
-                    'mapsUrl' => 'https://maps.app.goo.gl/58ZPsi3C7xu8rRTv8',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.924919,110.7998945&hl=id&z=17&output=embed',
+            
+                [
+                    'id' => 77,
+                    'slug' => 'sekar-modiste',
+                    'location' => [
+                        'address' => 'Jepang, Kudus',
+                        'fullAddress' => 'Unnamed Road, Jepang, Kec. Mejobo, Kabupaten Kudus, Jawa Tengah 59381',
+                        'mapsUrl' => 'https://maps.app.goo.gl/bfh9QtPPVyCbt5zx9',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.8245474,110.8704026&hl=id&z=15&output=embed',
+                    ],
                 ],
-            ],
-            [
-                'id' => 45,
-                'slug' => 'fotocopy-dan-jasa-travel',
-                'location' => [
-                    'address' => 'Lambangan Rt.2 Rw.1 Gg 02, Lambangan, Kudus',
-                    'fullAddress' => 'Lambangan Rt.2 Rw.1 Gg 02 undaan kudus, Lambangan, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
-                    'mapsUrl' => 'https://maps.app.goo.gl/58ZPsi3C7xu8rRTv8',
-                    'embedUrl' => 'https://www.google.com/maps?q=-6.924919,110.7998945&hl=id&z=17&output=embed',
+                [
+                    'id' => 78,
+                    'slug' => 'hasna-fashion',
+                    'location' => [
+                        'address' => 'Jalan Suryo Kusumo Gang 12, Jepang, Kudus',
+                        'fullAddress' => 'Jalan Suryo Kusumo Gang 12, Jepang, RT.01/RW.10, Mejobo, Kabupaten Kudus',
+                        'mapsUrl' => 'https://maps.app.goo.gl/ZSPbCmwMSsy1sy6G8',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.8268955,110.8739949&hl=id&z=17&output=embed',
+                    ],
                 ],
-            ],
-        ];
+                [
+                    'id' => 79,
+                    'slug' => 'queen-seblak-prasmanan',
+                    'location' => [
+                        'address' => 'Kampek Lor, Kalirejo, Kudus',
+                        'fullAddress' => '3QCR+R9R, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/MLtSm3m9YzNcH6xdA',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9278993,110.7909045&hl=id&z=15&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 80,
+                    'slug' => 'ayam-geprek-mak-ginting',
+                    'location' => [
+                        'address' => 'Gg. Manggis, Kampek Lor, Kalirejo, Kudus',
+                        'fullAddress' => '3QCR+H6H, Gg. Manggis, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/qFtBBS2GG2uW28Bt5',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9285735,110.7906047&hl=id&z=15&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 81,
+                    'slug' => 'warung-sate-dan-gule-pak-sugiyo',
+                    'location' => [
+                        'address' => 'Jl. Babalan - Prawoto, Kampek Lor, Kudus',
+                        'fullAddress' => '3QCR+95C, Jl. Babalan - Prawoto, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/WkJAj3Ka8ZGoC7Wu5',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9290637,110.790406&hl=id&z=15&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 82,
+                    'slug' => 'mj-teknik',
+                    'location' => [
+                        'address' => 'Kampek Lor, Kalirejo, Kudus',
+                        'fullAddress' => '3QFP+5R4, Kampek Lor, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/58ZPsi3C7xu8rRTv8',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.924919,110.7998945&hl=id&z=17&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 83,
+                    'slug' => 'fotocopy-dan-jasa-travel',
+                    'location' => [
+                        'address' => 'Lambangan Rt.2 Rw.1 Gg 02, Lambangan, Kudus',
+                        'fullAddress' => 'Lambangan Rt.2 Rw.1 Gg 02 undaan kudus, Lambangan, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/58ZPsi3C7xu8rRTv8',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.924919,110.7998945&hl=id&z=17&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 84,
+                    'slug' => 'ngabus-rejo',
+                    'location' => [
+                        'address' => 'Gabus, Medini, Kudus',
+                        'fullAddress' => 'Medini, gg17, Gabus, Medini, Kec. Undaan, Kabupaten Demak, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/CbDihLmNiQoVPENg7',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9201487,110.7887834&hl=id&z=15&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 85,
+                    'slug' => 'nano-distro',
+                    'location' => [
+                        'address' => 'Ngemplak Kidul, Kalirejo, Kudus',
+                        'fullAddress' => 'Jalan Kudus - Purwodadi RT.01/RW.01, Ngemplak Kidul, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/YekBYVtWroV66iUt6',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9240339,110.7927053&hl=id&z=15&output=embed',
+                    ],
+                ],
+                [
+                    'id' => 86,
+                    'slug' => 'ilbabalanos',
+                    'location' => [
+                        'address' => 'Ngemplak Lor Satu, Kalirejo, Kudus',
+                        'fullAddress' => 'belakang Bank BRI kalirejo, Jl. Purwodadi - Kudus No.km15, RT.1/RW.3, Ngemplak Lor Satu, Kalirejo, Kec. Undaan, Kabupaten Kudus, Jawa Tengah 59372',
+                        'mapsUrl' => 'https://maps.app.goo.gl/4CYJUDiPPLuqimZq7',
+                        'embedUrl' => 'https://www.google.com/maps?q=-6.9268485,110.791146&hl=id&z=15&output=embed',
+                    ],
+                ],
+            ]
+        ;
 
         foreach ($dataDetailUMKM as $data) {
             if (!isset($umkms[$data['slug']])) {
