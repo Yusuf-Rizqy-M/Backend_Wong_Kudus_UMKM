@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
             User::create([
             'name' => 'Admin UMKM Kudus',
             'foto_profil' => $baseUrl . 'yusup.jpg',
-            'email' => 'umkmkudus@gmail.com',
+            'email' => 'adminumkm@gmail.com',
             'password' => Hash::make('adminumkm2025'),
             'created_at' => now(),
             'updated_at' => now(),

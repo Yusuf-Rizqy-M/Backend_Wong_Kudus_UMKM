@@ -88,15 +88,34 @@ class RatingWebsiteController extends Controller
     }
 
     public function average()
-    {
-        $average = RatingWebsite::avg('rating');
+{
+    $ratings = RatingWebsite::select('rating', 'count')->get();
 
+    if ($ratings->isEmpty()) {
         return response()->json([
-            'status'  => true,
-            'message' => 'Rata-rata rating website.',
-            'average' => round($average, 2)
+            'status'  => false,
+            'message' => 'Belum ada rating.',
+            'average' => 0
         ], 200);
     }
+
+    $totalNilai = 0;
+    $totalVote = 0;
+
+    foreach ($ratings as $r) {
+        $totalNilai += $r->rating * $r->count;
+        $totalVote  += $r->count;
+    }
+
+    $average = $totalNilai / $totalVote;
+
+    return response()->json([
+        'status'  => true,
+        'message' => 'Rata-rata rating website.',
+        'average' => round($average, 2)
+    ], 200);
+}
+
 
     public function destroy($id)
     {
