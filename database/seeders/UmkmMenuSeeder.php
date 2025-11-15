@@ -38,7 +38,32 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Jasa Edit', 'description' => 'Melayani editing dokumen dan tata bahasa.', 'price' => 'Mulai Rp 20.000', 'image' => 'uploads/umkm/jasatulis_menu3.webp'],
                 ['name' => 'Jasa Ketik', 'description' => 'Melayani pengetikan dokumen cepat dan rapi.', 'price' => 'Mulai Rp 4.000', 'image' => 'uploads/umkm/jasatulis_menu4.webp'],
             ],
-
+            'resto-mvr-kudus' => [
+                ['name' => 'Prasmanan Ayam Lada Hitam', 'description' => 'Ayam lada hitam dengan cita rasa gurih pedas khas restoran.', 'price' => 'Rp 20.000', 'image' => 'uploads/umkm/mvr_menu1.webp'],
+                ['name' => 'Ikan Bakar', 'description' => 'Ikan segar dibakar dengan bumbu spesial yang menggugah selera.', 'price' => 'Rp 30.000', 'image' => 'uploads/umkm/mvr_menu2.webp'],
+                ['name' => 'Gurami Asam Manis', 'description' => 'Gurami goreng disajikan dengan saus asam manis segar dan lezat.', 'price' => 'Mulai Rp 23.000', 'image' => 'uploads/umkm/mvr_menu3.webp'],
+                ['name' => 'Mie Goreng', 'description' => 'Mie goreng spesial dengan sayuran segar dan topping pilihan.', 'price' => 'Rp 17.000', 'image' => 'uploads/umkm/mvr_menu4.webp'],
+            ],
+            'vjo-cafe-bistro' => [
+                ['name' => 'Mie Setan Level 2', 'description' => 'Ayam lada hitam dengan cita rasa gurih pedas khas restoran.', 'price' => 'Rp 9.500', 'image' => 'uploads/umkm/vjocafe_menu1.webp'],
+                ['name' => 'Nasi Ayam Baper', 'description' => 'Ikan segar dibakar dengan bumbu spesial yang menggugah selera.', 'price' => 'Rp 14.000', 'image' => 'uploads/umkm/vjocafe_menu2.webp'],
+            ],
+            'toko-al-maira' => [
+                ['name' => 'Bahan Bahan Makanan', 'description' => 'Menjual berbagai bahan makanan pokok seperti beras, gula, minyak goreng, tepung, dan bumbu dapur lengkap untuk kebutuhan rumah tangga.', 'price' => 'Mulai dari Rp 5.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
+                ['name' => 'Minuman dan Snack', 'description' => 'Tersedia aneka minuman ringan, kopi, teh, serta berbagai camilan kemasan untuk teman bersantai.', 'price' => 'Mulai dari Rp 3.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
+                ['name' => 'Produk Rumah Tangga', 'description' => 'Menyediakan perlengkapan harian seperti sabun, deterjen, dan kebutuhan kebersihan rumah.', 'price' => 'Mulai dari Rp 7.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
+            ],
+            'siskanuna-boutique' => [
+                ['name' => 'Dress & Gamis', 'description' => 'Koleksi dress dan gamis elegan untuk berbagai acara, dari kasual hingga formal.', 'price' => 'Mulai dari Rp 75.000', 'image' => 'uploads/umkm/siskanuna_menu1.webp'],
+                ['name' => 'Blouse & Atasan', 'description' => 'Beragam model blouse dan atasan modis dengan bahan nyaman dan desain kekinian.', 'price' => 'Mulai dari Rp 50.000', 'image' => 'uploads/umkm/siskanuna_menu1.webp'],
+                ['name' => 'Hijab & Aksesoris', 'description' => 'Pilihan hijab segi empat, pashmina, dan aksesoris wanita yang stylish dan serasi.', 'price' => 'Mulai dari Rp 25.000', 'image' => 'uploads/umkm/siskanuna_menu1.webp'],
+            ],
+            'terebatik' => [
+                ['name' => 'Busana Pria', 'description' => 'Koleksi pakaian pria mulai dari kemeja batik, kaos, hingga busana formal dengan desain modern dan bahan berkualitas.', 'price' => 'Mulai dari Rp 75.000', 'image' => 'uploads/umkm/terebatik_menu1.webp'],
+                ['name' => 'Busana Wanita', 'description' => 'Tersedia berbagai pilihan busana wanita seperti gamis, blouse, batik, dan dress elegan untuk berbagai acara.', 'price' => 'Mulai dari Rp 85.000', 'image' => 'uploads/umkm/terebatik_menu1.webp'],
+                ['name' => 'Busana Anak-anak', 'description' => 'Menawarkan pakaian anak-anak dengan motif lucu dan bahan nyaman, cocok untuk aktivitas sehari-hari maupun acara spesial.', 'price' => 'Mulai dari Rp 50.000', 'image' => 'uploads/umkm/terebatik_menu1.webp'],
+                ['name' => 'Aksesori & Pelengkap', 'description' => 'Lengkapi penampilan Anda dengan aksesori seperti sabuk, jilbab, topi, dan tas yang serasi dengan gaya busana pilihan.', 'price' => 'Mulai dari Rp 20.000', 'image' => 'uploads/umkm/terebatik_menu1.webp'],
+            ],
             // DAWE
             'swike-dawe-restaurant' => [
                 ['name' => 'Sop Daging', 'description' => 'Sop daging sapi dengan kuah bening segar.', 'price' => 'Rp 30.000', 'image' => 'uploads/umkm/swikedawe_menu1.webp'],
@@ -139,7 +164,7 @@ class UmkmMenuSeeder extends Seeder
             ],
             'berkah-es-buah' => [
                 ['name' => 'Makanan Buah', 'description' => 'Segarnya campuran buah pilihan dengan sirup manis dan sedikit es serut, cocok untuk menyegarkan hari Anda.', 'price' => 'Rp 15.000', 'image' => 'uploads/umkm/berkah_menu1.webp'],
-                ['name' => 'Minuman Buah', 'description' => 'Minuman buah segar yang menyehatkan, dipadukan dengan topping jelly dan sirup favorit. Nikmat dimin  kapan saja.', 'price' => 'Rp 12.000', 'image' => 'uploads/umkm/berkah_menu2.webp'],
+                ['name' => 'Minuman Buah', 'description' => 'Minuman buah segar yang menyehatkan, dipadukan dengan topping jelly dan sirup favorit. Nikmat diminum kapan saja.', 'price' => 'Rp 12.000', 'image' => 'uploads/umkm/berkah_menu2.webp'],
             ],
             'warnet-jaya-sentosa' => [
                 ['name' => 'Rental', 'description' => 'Sewa PC gaming atau workstation lengkap dengan koneksi internet cepat. Cocok untuk main game, belajar, atau browsing nyaman sepanjang hari.', 'price' => 'Rp 3.000 - Rp 20.000', 'image' => 'uploads/umkm/warnet_menu1.webp'],
@@ -231,13 +256,30 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Kakap Godog', 'description' => 'Ikan kakap segar dimasak dengan bumbu godog khas Jawa Tengah — gurih, sedikit pedas, dan beraroma rempah kuat.', 'price' => 'Rp 25.000', 'image' => 'uploads/umkm/sarah_menu3.webp'],
                 ['name' => 'Pecel Lele', 'description' => 'Lele goreng garing disajikan bersama sambal tomat pedas dan lalapan segar. Menu sederhana yang selalu jadi favorit pengunjung.', 'price' => 'Rp 20.000', 'image' => 'uploads/umkm/sarah_menu4.webp'],
             ],
+            'sate-kambing-pak-brewok' => [
+                ['name' => 'Sate Kambing', 'description' => 'Sate kambing muda yang dibakar dengan bumbu kecap, irisan bawang, dan sambal, disajikan bersama nasi atau lontong.', 'price' => 'Mulai dari Rp 30.000', 'image' => 'uploads/umkm/satekambing_menu1.webp'],
+                ['name' => 'Gule Kambing', 'description' => 'Kuah gule kambing beraroma rempah dengan daging yang lembut, cocok dinikmati selagi panas.', 'price' => 'Mulai dari Rp 25.000', 'image' => 'uploads/umkm/satekambing_menu2.webp'],
+                ['name' => 'Tongseng Kepala Kambing', 'description' => 'Tongseng kepala kambing dengan kuah kental manis-gurih khas pekeng, isi daging dan tulang lunak yang kaya rasa.', 'price' => 'Mulai dari Rp 28.000', 'image' => 'uploads/umkm/satekambing_menu3.webp'],
+            ],
+            'loh-jinawi' => [
+                ['name' => 'Gelang Tasbih & Antik', 'description' => 'Koleksi gelang tasbih kayu, batu, dan aksesoris tradisional serta barang antik pilihan.', 'price' => 'Mulai dari Rp 40.000', 'image' => 'uploads/umkm/lohjinawi_menu1.webp'],
+            ],
+            'toko-auralia' => [
+                ['name' => 'Paket Sembako & Rumah Tangga', 'description' => 'Gabungan bahan makanan pokok serta perlengkapan rumah tangga seperti sabun, deterjen, dan alat kebersihan.', 'price' => 'Mulai dari Rp 20.000', 'image' => 'uploads/umkm/tokoaurelia_menu1.webp'],
+            ],
+            'sekar-modiste' => [
+                ['name' => 'Busana & Jasa Jahit', 'description' => 'Pilihan dress, blouse, tunik, dan layanan jahit/ubah sesuai ukuran dan permintaan.', 'price' => 'Mulai dari Rp 80.000', 'image' => 'uploads/umkm/sekar_menu1.webp'],
+            ],
+            'hasna-fashion' => [
+                ['name' => 'Busana Muslim Wanita', 'description' => 'Koleksi gamis, tunik, hijab & aksesori wanita dengan desain kekinian dan bahan nyaman.', 'price' => 'Mulai dari Rp 65.000', 'image' => 'uploads/umkm/hasnafashion_menu1.webp'],
+            ],
 
             // UNDAAN
             'queen-seblak-prasmanan' => [
                 ['name' => 'Seblak Original', 'description' => 'Seblak khas Bandung dengan kuah pedas gurih, isi kerupuk, telur, dan bumbu kencur yang menggugah selera.', 'price' => 'Rp 12.000', 'image' => 'uploads/umkm/queenseblak_menu1.webp'],
                 ['name' => 'Seblak Aci', 'description' => 'Perpaduan kenyalnya aci, kerupuk, dan topping sederhana dengan kuah pedas creamy yang bikin nagih.', 'price' => 'Rp 15.000', 'image' => 'uploads/umkm/queenseblak_menu2.webp'],
                 ['name' => 'Seblak Bakso', 'description' => 'Kuah seblak pedas gurih dengan tambahan bakso sapi empuk dan topping khas Queen Seblak Prasmanan.', 'price' => 'Rp 18.000', 'image' => 'uploads/umkm/queenseblak_menu3.webp'],
-                ['name' => 'Seblak Sayur', 'description' => 'Seblak sehat dengan isian sayur segar, telur, dan kerupuk dalam kuah ped pedas gurih yang hangat di perut.', 'price' => 'Rp 16.000', 'image' => 'uploads/umkm/queenseblak_menu4.webp'],
+                ['name' => 'Seblak Sayur', 'description' => 'Seblak sehat dengan isian sayur segar, telur, dan kerupuk dalam kuah pedas gurih yang hangat di perut.', 'price' => 'Rp 16.000', 'image' => 'uploads/umkm/queenseblak_menu4.webp'],
             ],
             'ayam-geprek-mak-ginting' => [
                 ['name' => 'Ayam Geprek Pedas Manis', 'description' => 'Ayam goreng krispi disiram sambal pedas manis khas Mak Ginting, perpaduan rasa gurih, pedas, dan sedikit manis yang pas di lidah.', 'price' => 'Rp 10.000', 'image' => 'uploads/umkm/makginting_menu1.webp'],
@@ -256,6 +298,15 @@ class UmkmMenuSeeder extends Seeder
             ],
             'fotocopy-dan-jasa-travel' => [
                 ['name' => 'Layanan Fotocopy & Travel', 'description' => 'Melayani fotokopi dokumen hitam putih maupun berwarna, print, scan, serta jasa travel antar kota dengan pelayanan cepat, ramah, dan harga terjangkau.', 'price' => 'Mulai Rp 2.000 per lembar / Rp 150.000 per trip', 'image' => 'uploads/umkm/jasatravel_menu1.webp'],
+            ],
+            'ngabus-rejo' => [
+                ['name' => 'Bahan Makanan', 'description' => 'Sembako, bumbu dapur, sayuran segar, dan kebutuhan harian lainnya.', 'price' => 'Mulai dari Rp 5.000', 'image' => 'uploads/umkm/ngabusrejo_menu1.webp'],
+            ],
+            'nano-distro' => [
+                ['name' => 'Pakaian Pria', 'description' => 'Kaos, kemeja, jaket, dan aksesoris pria dengan desain modern.', 'price' => 'Mulai dari Rp 50.000', 'image' => 'uploads/umkm/nanodistro_menu1.webp'],
+            ],
+            'ilbabalanos' => [
+                ['name' => 'Pakaian Pria & Wanita', 'description' => 'Beragam model pakaian casual dan formal untuk pria & wanita dengan kualitas nyaman.', 'price' => 'Mulai dari Rp 60.000', 'image' => 'uploads/umkm/ilbabalanos_menu1.webp'],
             ],
         ];
 
