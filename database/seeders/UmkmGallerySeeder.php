@@ -21,7 +21,6 @@ class UmkmGallerySeeder extends Seeder
 
         // 3. Data detail UMKM (hanya bagian galeri)
         $dataDetailUMKM = [
-            // BAE
             [
                 'slug' => 'warung-makan-om-w',
                 'galleryImages' => [
@@ -69,8 +68,50 @@ class UmkmGallerySeeder extends Seeder
                     $baseUrl . 'jasatulis_galerifoto5.webp',
                 ],
             ],
-
-            // DAWE
+            [
+                'slug' => 'resto-mvr-kudus',
+                'galleryImages' => [
+                    $baseUrl . 'mvr_galerifoto1.webp',
+                    $baseUrl . 'mvr_galerifoto2.webp',
+                    $baseUrl . 'mvr_galerifoto3.webp',
+                    $baseUrl . 'mvr_galerifoto4.webp',
+                    $baseUrl . 'mvr_galerifoto5.webp',
+                ],
+            ],
+            [
+                'slug' => 'vjo-cafe-bistro',
+                'galleryImages' => [
+                    $baseUrl . 'vjocafe_galerifoto1.webp',
+                    $baseUrl . 'vjocafe_galerifoto2.webp',
+                    $baseUrl . 'vjocafe_galerifoto3.webp',
+                    $baseUrl . 'vjocafe_galerifoto4.webp',
+                    $baseUrl . 'vjocafe_galerifoto5.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-al-maira',
+                'galleryImages' => [
+                    $baseUrl . 'tokoalmaira_galerifoto1.webp',
+                    $baseUrl . 'tokoalmaira_galerifoto2.webp',
+                    $baseUrl . 'tokoalmaira_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'siskanuna-boutique',
+                'galleryImages' => [
+                    $baseUrl . 'siskanuna_galerifoto1.webp',
+                    $baseUrl . 'siskanuna_galerifoto2.webp',
+                    $baseUrl . 'siskanuna_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'terebatik',
+                'galleryImages' => [
+                    $baseUrl . 'terebatik_galerifoto1.webp',
+                    $baseUrl . 'terebatik_galerifoto2.webp',
+                    $baseUrl . 'terebatik_galerifoto3.webp',
+                ],
+            ],
             [
                 'slug' => 'swike-dawe-restaurant',
                 'galleryImages' => [
@@ -118,8 +159,46 @@ class UmkmGallerySeeder extends Seeder
                     $baseUrl . 'sai_galerifoto4.webp',
                 ],
             ],
-
-            // GEBOG
+            [
+                'slug' => 'warung-makan-sendang-mulia',
+                'galleryImages' => [
+                    $baseUrl . 'sendangmulia_galerifoto1.webp',
+                    $baseUrl . 'sendangmulia_galerifoto2.webp',
+                    $baseUrl . 'sendangmulia_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-adib-azka',
+                'galleryImages' => [
+                    $baseUrl . 'tokoadib_galerifoto1.webp',
+                    $baseUrl . 'tokoadib_galerifoto2.webp',
+                    $baseUrl . 'tokoadib_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-sri-dawe',
+                'galleryImages' => [
+                    $baseUrl . 'sridawe_galerifoto1.webp',
+                    $baseUrl . 'sridawe_galerifoto2.webp',
+                    $baseUrl . 'sridawe_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'arfan-outfit-kudus',
+                'galleryImages' => [
+                    $baseUrl . 'arfanoutfit_galerifoto1.webp',
+                    $baseUrl . 'arfanoutfit_galerifoto2.webp',
+                    $baseUrl . 'arfanoutfit_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'dinda-store-ds',
+                'galleryImages' => [
+                    $baseUrl . 'dindastore_galerifoto1.webp',
+                    $baseUrl . 'dindastore_galerifoto2.webp',
+                    $baseUrl . 'dindastore_galerifoto3.webp',
+                ],
+            ],
             [
                 'slug' => 'warung-makan-mbah-sapar',
                 'galleryImages' => [
@@ -130,8 +209,6 @@ class UmkmGallerySeeder extends Seeder
                     $baseUrl . 'mbahsapar_galerifoto5.webp',
                 ],
             ],
-
-            // === ID 12–45: DATA BARU ===
             [
                 'slug' => 'nasi-uduk-dan-nasi-kuning-gang-satu',
                 'galleryImages' => [
@@ -165,6 +242,47 @@ class UmkmGallerySeeder extends Seeder
                 'slug' => 'kasehito-works',
                 'galleryImages' => [
                     $baseUrl . 'kasehito_menu1.webp',
+                ],
+            ],
+            [
+                'slug' => 'basina-food',
+                'galleryImages' => [
+                    $baseUrl . 'basina_galerifoto1.webp',
+                    $baseUrl . 'basina_galerifoto2.webp',
+                    $baseUrl . 'basina_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'campaign-coffee',
+                'galleryImages' => [
+                    $baseUrl . 'campaigncoffee_galerifoto1.webp',
+                    $baseUrl . 'campaigncoffee_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-tna-jaya',
+                'galleryImages' => [
+                    $baseUrl . 'tokotnajaya_menu1.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-teguh-sudarsono',
+                'galleryImages' => [
+                    $baseUrl . 'tokoteguh_galerifoto1.webp',
+                ],
+            ],
+            [
+                'slug' => 'nilna-dion-collection',
+                'galleryImages' => [
+                    $baseUrl . 'nilnadion_galerifoto1.webp',
+                    $baseUrl . 'nilnadion_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-kastimah',
+                'galleryImages' => [
+                    $baseUrl . 'tokokastimah_galerifoto1.webp',
+                    $baseUrl . 'tokokastimah_galerifoto2.webp',
                 ],
             ],
             [
@@ -214,6 +332,41 @@ class UmkmGallerySeeder extends Seeder
                 ],
             ],
             [
+                'slug' => 'gravitasi-teras-muria',
+                'galleryImages' => [
+                    $baseUrl . 'gravitasi_galerifoto1.webp',
+                    $baseUrl . 'gravitasi_galerifoto2.webp',
+                    $baseUrl . 'gravitasi_galerifoto3.webp',
+                    $baseUrl . 'gravitasi_galerifoto4.webp',
+                    $baseUrl . 'gravitasi_galerifoto5.webp',
+                    $baseUrl . 'gravitasi_galerifoto6.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-kliwon',
+                'galleryImages' => [
+                    $baseUrl . 'tokokliwon_galerifoto1.webp',
+                    $baseUrl . 'tokokliwon_galerifoto2.webp',
+                    $baseUrl . 'tokokliwon_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-happy-kids',
+                'galleryImages' => [
+                    $baseUrl . 'tokohappy_galerifoto1.webp',
+                    $baseUrl . 'tokohappy_galerifoto2.webp',
+                    $baseUrl . 'tokohappy_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'nobby-kudus-extension',
+                'galleryImages' => [
+                    $baseUrl . 'nobby_galerifoto1.webp',
+                    $baseUrl . 'nobby_galerifoto2.webp',
+                    $baseUrl . 'nobby_galerifoto3.webp',
+                ],
+            ],
+            [
                 'slug' => 'jus-pojokan',
                 'galleryImages' => [
                     $baseUrl . 'pojokan_galerifoto1.webp',
@@ -247,6 +400,35 @@ class UmkmGallerySeeder extends Seeder
                 'slug' => 'warnet-jaya-sentosa',
                 'galleryImages' => [
                     $baseUrl . 'warnet_menu1.webp',
+                ],
+            ],
+            [
+                'slug' => 'warung-mie-dadat',
+                'galleryImages' => [
+                    $baseUrl . 'miedadat_galerifoto1.webp',
+                    $baseUrl . 'miedadat_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-risfan-snack',
+                'galleryImages' => [
+                    $baseUrl . 'tokorisfan_galerifoto1.webp',
+                    $baseUrl . 'tokorisfan_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'js-muslim-collection',
+                'galleryImages' => [
+                    $baseUrl . 'jsmuslim_galerifoto1.webp',
+                    $baseUrl . 'jsmuslim_galerifoto2.webp',
+                    $baseUrl . 'jsmuslim_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'kios-hjh',
+                'galleryImages' => [
+                    $baseUrl . 'kioshjh_galerifoto1.webp',
+                    $baseUrl . 'kioshjh_galerifoto2.webp',
                 ],
             ],
             [
@@ -290,6 +472,45 @@ class UmkmGallerySeeder extends Seeder
                 ],
             ],
             [
+                'slug' => 'sego-sambel-lek-kas2',
+                'galleryImages' => [
+                    $baseUrl . 'segosambel_galerifoto1.webp',
+                    $baseUrl . 'segosambel_galerifoto2.webp',
+                    $baseUrl . 'segosambel_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-jamaah',
+                'galleryImages' => [
+                    $baseUrl . 'tokojemaah_galerifoto1.webp',
+                    $baseUrl . 'tokojemaah_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'mm-amanah',
+                'galleryImages' => [
+                    $baseUrl . 'mmamanah_galerifoto1.webp',
+                    $baseUrl . 'mmamanah_galerifoto2.webp',
+                    $baseUrl . 'mmamanah_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-van-helen',
+                'galleryImages' => [
+                    $baseUrl . 'tokovanhelen_galerifoto1.webp',
+                    $baseUrl . 'tokovanhelen_galerifoto2.webp',
+                    $baseUrl . 'tokovanhelen_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'lina-family',
+                'galleryImages' => [
+                    $baseUrl . 'linafamily_galerifoto1.webp',
+                    $baseUrl . 'linafamily_galerifoto2.webp',
+                    $baseUrl . 'linafamily_galerifoto3.webp',
+                ],
+            ],
+            [
                 'slug' => 'susu-moeria',
                 'galleryImages' => [
                     $baseUrl . 'moeria_galerifoto1.webp',
@@ -327,14 +548,46 @@ class UmkmGallerySeeder extends Seeder
                     $baseUrl . 'sultanbarbertop_galerifoto5.webp',
                 ],
             ],
-
-            // KOTA KUDUS & MEJOBO & UNDAAN (ID 35–45)
             [
                 'slug' => 'soto-kudus-bu-jatmi',
                 'galleryImages' => [
-                    $baseUrl . 'sotobujatmi_galerifoto1.webp',
-                    $baseUrl . 'sotobujatmi_galerifoto2.webp',
-                    $baseUrl . 'sotobujatmi_galerifoto3.webp',
+                    $baseUrl . 'sotokudusbujatmi_galerifoto1.webp',
+                    $baseUrl . 'sotokudusbujatmi_galerifoto2.webp',
+                    $baseUrl . 'sotokudusbujatmi_galerifoto3.webp',
+                    $baseUrl . 'sotokudusbujatmi_galerifoto4.webp',
+                    $baseUrl . 'sotokudusbujatmi_galerifoto5.webp',
+                ],
+            ],
+            [
+                'slug' => 'treend-steak-kudus',
+                'galleryImages' => [
+                    $baseUrl . 'treendsteak_galerifoto1.webp',
+                    $baseUrl . 'treendsteak_galerifoto2.webp',
+                    $baseUrl . 'treendsteak_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'larees-jaya-electronics',
+                'galleryImages' => [
+                    $baseUrl . 'lareesjaya_galerifoto1.webp',
+                    $baseUrl . 'lareesjaya_galerifoto2.webp',
+                    $baseUrl . 'lareesjaya_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'es-coklat-cokot-kudus',
+                'galleryImages' => [
+                    $baseUrl . 'escoklat_galerifoto1.webp',
+                    $baseUrl . 'escoklat_galerifoto2.webp',
+                    $baseUrl . 'escoklat_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'richie-store-kudus',
+                'galleryImages' => [
+                    $baseUrl . 'richie_galerifoto1.webp',
+                    $baseUrl . 'richie_galerifoto2.webp',
+                    $baseUrl . 'richie_galerifoto3.webp',
                 ],
             ],
             [
@@ -342,6 +595,7 @@ class UmkmGallerySeeder extends Seeder
                 'galleryImages' => [
                     $baseUrl . 'xgam_galerifoto1.webp',
                     $baseUrl . 'xgam_galerifoto2.webp',
+                    $baseUrl . 'xgam_galerifoto3.webp',
                 ],
             ],
             [
@@ -355,8 +609,10 @@ class UmkmGallerySeeder extends Seeder
             [
                 'slug' => 'putra-kalimosodo',
                 'galleryImages' => [
-                    $baseUrl . 'putrakalimosodo_galerifoto1.webp',
-                    $baseUrl . 'putrakalimosodo_galerifoto2.webp',
+                    $baseUrl . 'kalimosodo_galerifoto1.webp',
+                    $baseUrl . 'kalimosodo_galerifoto2.webp',
+                    $baseUrl . 'kalimosodo_galerifoto3.webp',
+                    $baseUrl . 'kalimosodo_galerifoto4.webp',
                 ],
             ],
             [
@@ -366,13 +622,53 @@ class UmkmGallerySeeder extends Seeder
                     $baseUrl . 'nasuky_galerifoto2.webp',
                     $baseUrl . 'nasuky_galerifoto3.webp',
                     $baseUrl . 'nasuky_galerifoto4.webp',
+                    $baseUrl . 'nasuky_galerifoto5.webp',
                 ],
             ],
             [
                 'slug' => 'rm-bu-sarah',
                 'galleryImages' => [
-                    $baseUrl . 'rmsarah_galerifoto1.webp',
-                    $baseUrl . 'rmsarah_galerifoto2.webp',
+                    $baseUrl . 'sarah_galerifoto1.webp',
+                    $baseUrl . 'sarah_galerifoto2.webp',
+                    $baseUrl . 'sarah_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'sate-kambing-pak-brewok',
+                'galleryImages' => [
+                    $baseUrl . 'pakbrewok_galerifoto1.webp',
+                    $baseUrl . 'pakbrewok_galerifoto2.webp',
+                    $baseUrl . 'pakbrewok_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'loh-jinawi',
+                'galleryImages' => [
+                    $baseUrl . 'lohjinawi_galerifoto1.webp',
+                    $baseUrl . 'lohjinawi_galerifoto2.webp',
+                ],
+            ],
+            [
+                'slug' => 'toko-auralia',
+                'galleryImages' => [
+                    $baseUrl . 'tokoauralia_galerifoto1.webp',
+                    $baseUrl . 'tokoauralia_galerifoto2.webp',
+                    $baseUrl . 'tokoauralia_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'sekar-modiste',
+                'galleryImages' => [
+                    $baseUrl . 'sekar_galerifoto1.webp',
+                    $baseUrl . 'sekar_galerifoto2.webp',
+                    $baseUrl . 'sekar_galerifoto3.webp',
+                    $baseUrl . 'sekar_galerifoto4.webp',
+                ],
+            ],
+            [
+                'slug' => 'hasna-fashion',
+                'galleryImages' => [
+                    $baseUrl . 'hasnafashion_galerifoto1.webp',
                 ],
             ],
             [
@@ -380,7 +676,6 @@ class UmkmGallerySeeder extends Seeder
                 'galleryImages' => [
                     $baseUrl . 'queenseblak_galerifoto1.webp',
                     $baseUrl . 'queenseblak_galerifoto2.webp',
-                    $baseUrl . 'queenseblak_galerifoto3.webp',
                 ],
             ],
             [
@@ -388,14 +683,15 @@ class UmkmGallerySeeder extends Seeder
                 'galleryImages' => [
                     $baseUrl . 'makginting_galerifoto1.webp',
                     $baseUrl . 'makginting_galerifoto2.webp',
+                    $baseUrl . 'makginting_galerifoto3.webp',
+                    $baseUrl . 'makginting_galerifoto4.webp',
                 ],
             ],
             [
                 'slug' => 'warung-sate-dan-gule-pak-sugiyo',
                 'galleryImages' => [
-                    $baseUrl . 'paksugiyo_galerifoto1.webp',
-                    $baseUrl . 'paksugiyo_galerifoto2.webp',
-                    $baseUrl . 'paksugiyo_galerifoto3.webp',
+                    $baseUrl . 'sugiyo_galerifoto1.webp',
+                    $baseUrl . 'sugiyo_galerifoto2.webp',
                 ],
             ],
             [
@@ -403,14 +699,37 @@ class UmkmGallerySeeder extends Seeder
                 'galleryImages' => [
                     $baseUrl . 'mjteknik_galerifoto1.webp',
                     $baseUrl . 'mjteknik_galerifoto2.webp',
+                    $baseUrl . 'mjteknik_galerifoto3.webp',
                 ],
             ],
             [
                 'slug' => 'fotocopy-dan-jasa-travel',
                 'galleryImages' => [
-                    $baseUrl . 'fotocopytravel_galerifoto1.webp',
-                    $baseUrl . 'fotocopytravel_galerifoto2.webp',
-                    $baseUrl . 'fotocopytravel_galerifoto3.webp',
+                    $baseUrl . 'jasatravel_galerifoto1.webp',
+                ],
+            ],
+            [
+                'slug' => 'ngabus-rejo',
+                'galleryImages' => [
+                    $baseUrl . 'ngabusrejo_galerifoto1.webp',
+                    $baseUrl . 'ngabusrejo_galerifoto2.webp',
+                    $baseUrl . 'ngabusrejo_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'nano-distro',
+                'galleryImages' => [
+                    $baseUrl . 'nanodistro_galerifoto1.webp',
+                    $baseUrl . 'nanodistro_galerifoto2.webp',
+                    $baseUrl . 'nanodistro_galerifoto3.webp',
+                ],
+            ],
+            [
+                'slug' => 'ilbabalanos',
+                'galleryImages' => [
+                    $baseUrl . 'ilbabalanos_galerifoto1.webp',
+                    $baseUrl . 'ilbabalanos_galerifoto2.webp',
+                    $baseUrl . 'ilbabalanos_galerifoto3.webp',
                 ],
             ],
         ];
