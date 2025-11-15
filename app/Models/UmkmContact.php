@@ -10,6 +10,7 @@ class UmkmContact extends Model
 {
     use HasFactory;
 
+    
     protected $primaryKey = 'umkm_id';
     public $incrementing = false;
 

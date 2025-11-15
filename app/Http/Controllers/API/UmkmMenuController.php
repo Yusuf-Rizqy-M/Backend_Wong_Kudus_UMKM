@@ -1,22 +1,35 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Models\UmkmMenu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use Storage; 
+use Illuminate\Support\Facades\Storage;
 
 class UmkmMenuController extends Controller
 {
+    /**
+     * Helper untuk convert image path → full URL
+     */
+    private function getImageUrl($menu)
+    {
+        if ($menu->image) {
+            $menu->image = url(Storage::url($menu->image));
+        }
+        return $menu;
+    }
+
+    /**
+     * Menampilkan semua menu aktif
+     */
     public function index()
     {
-        $menus = UmkmMenu::where('status', 'active')->latest()->get()->map(function ($menu) {
-            if ($menu->image) {
-                $menu->image = url(Storage::url($menu->image));
-            }
-            return $menu;
-        });
+        $menus = UmkmMenu::where('status', 'active')
+            ->latest()
+            ->get()
+            ->map(fn($m) => $this->getImageUrl($m));
 
         return response()->json([
             'status' => true,
@@ -25,6 +38,9 @@ class UmkmMenuController extends Controller
         ], 200);
     }
 
+    /**
+     * Menambah menu baru
+     */
     public function store(Request $request)
     {
         try {
@@ -33,27 +49,21 @@ class UmkmMenuController extends Controller
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'price' => 'nullable|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             ]);
 
             if ($request->hasFile('image')) {
-                $path = $request->file('image')->store('menu_images', 'public');
+                $path = $request->file('image')->store('uploads/umkm', 'public');
                 $validatedData['image'] = $path;
             }
 
             $validatedData['status'] = 'active';
-
             $menu = UmkmMenu::create($validatedData);
-            
-            $menu->refresh(); 
-            if ($menu->image) {
-                $menu->image = url(Storage::url($menu->image));
-            }
 
             return response()->json([
                 'status' => true,
                 'message' => 'Menu berhasil ditambahkan',
-                'data' => $menu 
+                'data' => $this->getImageUrl($menu)
             ], 201);
 
         } catch (ValidationException $e) {
@@ -65,56 +75,46 @@ class UmkmMenuController extends Controller
         }
     }
 
+    /**
+     * Menampilkan detail menu
+     */
     public function show(UmkmMenu $umkmMenu)
     {
-        if ($umkmMenu->status != 'active') {
+        if ($umkmMenu->status !== 'active') {
             return response()->json([
                 'status' => false,
                 'message' => 'Menu tidak ditemukan'
             ], 404);
         }
 
-        if ($umkmMenu->image) {
-            $umkmMenu->image = url(Storage::url($umkmMenu->image));
-        }
-
         return response()->json([
             'status' => true,
             'message' => 'Detail menu berhasil diambil',
-            'data' => $umkmMenu
+            'data' => $this->getImageUrl($umkmMenu)
         ], 200);
     }
 
-    // --- FUNGSI BARU DITAMBAHKAN ---
     /**
-     * Mengambil semua menu aktif berdasarkan ID UMKM.
+     * Menampilkan menu berdasarkan UMKM
      */
     public function getByUmkm($umkm_id)
     {
-        // Cari semua menu dengan umkm_id yang sesuai dan status 'active'
         $menus = UmkmMenu::where('umkm_id', $umkm_id)
-                          ->where('status', 'active')
-                          ->latest()
-                          ->get()
-                          ->map(function ($menu) {
-            // Ubah path gambar menjadi URL lengkap
-            if ($menu->image) {
-                $menu->image = url(Storage::url($menu->image));
-            }
-            return $menu;
-        });
+            ->where('status', 'active')
+            ->latest()
+            ->get()
+            ->map(fn($m) => $this->getImageUrl($m));
 
-        // Cek jika UMKM ada tapi tidak punya menu, akan mengembalikan array kosong []. Ini normal.
-        
         return response()->json([
             'status' => true,
             'message' => 'Data menu by UMKM berhasil diambil',
             'data' => $menus
         ], 200);
     }
-    // --- AKHIR FUNGSI BARU ---
 
-
+    /**
+     * Update menu
+     */
     public function update(Request $request, UmkmMenu $umkmMenu)
     {
         try {
@@ -123,36 +123,23 @@ class UmkmMenuController extends Controller
                 'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
                 'price' => 'nullable|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             ]);
 
             if ($request->hasFile('image')) {
-                // Hapus gambar lama jika ada
-                if ($umkmMenu->image) {
-                    // Cek dulu apakah path-nya adalah URL lengkap atau path relatif
-                    // Karena accessor mungkin sudah mengubahnya
-                    $oldMenuData = $umkmMenu->getOriginal();
-                    if ($oldMenuData['image'] && Storage::disk('public')->exists($oldMenuData['image'])) {
-                        Storage::disk('public')->delete($oldMenuData['image']);
-                    }
+                if ($umkmMenu->image && Storage::disk('public')->exists($umkmMenu->image)) {
+                    Storage::disk('public')->delete($umkmMenu->image);
                 }
-                
-                // Simpan gambar baru
-                $path = $request->file('image')->store('menu_images', 'public');
+                $path = $request->file('image')->store('uploads/umkm', 'public');
                 $validatedData['image'] = $path;
             }
 
             $umkmMenu->update($validatedData);
 
-            $umkmMenu->refresh(); 
-            if ($umkmMenu->image) {
-                $umkmMenu->image = url(Storage::url($umkmMenu->image));
-            }
-
             return response()->json([
                 'status' => true,
                 'message' => 'Menu berhasil diperbarui',
-                'data' => $umkmMenu
+                'data' => $this->getImageUrl($umkmMenu)
             ], 200);
 
         } catch (ValidationException $e) {
@@ -164,8 +151,15 @@ class UmkmMenuController extends Controller
         }
     }
 
+    /**
+     * Soft delete menu
+     */
     public function destroy(UmkmMenu $umkmMenu)
     {
+        if ($umkmMenu->image && Storage::disk('public')->exists($umkmMenu->image)) {
+            Storage::disk('public')->delete($umkmMenu->image);
+        }
+
         $umkmMenu->update(['status' => 'inactive']);
 
         return response()->json([

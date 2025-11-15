@@ -18,13 +18,14 @@ use App\Http\Controllers\API\UmkmMenuController;
 use App\Http\Controllers\API\UmkmLocationController;
 use App\Http\Controllers\API\UmkmContactController;
 
-
+Route::get('/galeri-umkm/trash', [GaleriUmkmController::class, 'trash']);
 // === PUBLIC ROUTES ===
 Route::post('/login', [UserController::class, 'login']);
 
 // --- KATEGORI ---
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
+Route::get('/categories-with-umkm', [CategoryController::class, 'indexWithUmkm']);
 
 // --- UMKM ---
 Route::get('/umkm', [UmkmController::class, 'index']);

@@ -10,12 +10,24 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    // Mencegah URL double
+    private function fixUrl($path)
+    {
+        if (!$path) return null;
+
+        // Jika sudah HTTP (URL penuh) — KEMBALIKAN apa adanya
+        if (str_starts_with($path, 'http')) {
+            return $path;
+        }
+
+        // Jika path biasa -> convert ke URL storage
+        return url(Storage::url($path));
+    }
+
     public function index()
     {
         $categories = Category::orderBy('created_at', 'desc')->get()->map(function ($category) {
-            if ($category->icon) {
-                $category->icon = url(Storage::url($category->icon));
-            }
+            $category->icon = $this->fixUrl($category->icon);
             return $category;
         });
 
@@ -38,9 +50,7 @@ class CategoryController extends Controller
             ], 404);
         }
 
-        if ($category->icon) {
-            $category->icon = url(Storage::url($category->icon));
-        }
+        $category->icon = $this->fixUrl($category->icon);
 
         return response()->json([
             'status' => true,
@@ -67,20 +77,17 @@ class CategoryController extends Controller
 
         $data = $validator->validated();
 
+        // Simpan hanya PATH bukan URL
         if ($request->hasFile('icon')) {
             $path = $request->file('icon')->store('uploads/categories', 'public');
             $data['icon'] = $path;
         }
 
-        // Set default status active
         $data['status'] = 'active';
 
         $category = Category::create($data);
-        $category->refresh(); // Pastikan status dan field lain muncul dari DB
 
-        if ($category->icon) {
-            $category->icon = url(Storage::url($category->icon));
-        }
+        $category->icon = $this->fixUrl($category->icon);
 
         return response()->json([
             'status' => true,
@@ -119,6 +126,7 @@ class CategoryController extends Controller
         $data = $validator->validated();
 
         if ($request->hasFile('icon')) {
+
             if ($category->icon && Storage::disk('public')->exists($category->icon)) {
                 Storage::disk('public')->delete($category->icon);
             }
@@ -128,11 +136,8 @@ class CategoryController extends Controller
         }
 
         $category->update($data);
-        $category->refresh(); // Ambil ulang data termasuk status
 
-        if ($category->icon) {
-            $category->icon = url(Storage::url($category->icon));
-        }
+        $category->icon = $this->fixUrl($category->icon);
 
         return response()->json([
             'status' => true,
@@ -154,10 +159,6 @@ class CategoryController extends Controller
         }
 
         if ($category->status === 'inactive') {
-            if ($category->icon && !str_starts_with($category->icon, 'http')) {
-                $category->icon = asset('storage/' . $category->icon);
-            }
-
             return response()->json([
                 'status' => false,
                 'message' => 'Kategori sudah tidak aktif',
@@ -167,11 +168,8 @@ class CategoryController extends Controller
 
         $category->status = 'inactive';
         $category->save();
-        $category->refresh();
 
-        if ($category->icon && !str_starts_with($category->icon, 'http')) {
-            $category->icon = asset('storage/' . $category->icon);
-        }
+        $category->icon = $this->fixUrl($category->icon);
 
         return response()->json([
             'status' => true,

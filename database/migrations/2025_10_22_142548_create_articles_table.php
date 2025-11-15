@@ -13,7 +13,6 @@ return new class extends Migration {
             $table->string('author');
             $table->string('title');
             $table->longText('content');
-
             $table->string('image')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
