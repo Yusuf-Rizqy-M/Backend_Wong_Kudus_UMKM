@@ -34,7 +34,7 @@ class UmkmSeeder extends Seeder
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ayam Geprek Jawi"',
                 'hero_subtitle' => 'Menyajikan ayam geprek pedas dengan sambal khas yang menggugah selera.',
                 'description' => 'Outlet ayam geprek dengan rasa pedas khas Kudus dan harga mahasiswa.',
-                'about' => '<strong>Ayam Geprek Jawi</strong> adalah outlet ayam geprek yang berlokasi di Kota Kudus, dekat kampus UMK, dengan variasi sambal pedas sebagai daya tariknya.',
+                'about' => '<strong>Ayam Geprek Jawi</strong> adalah outlet ayam geprek yang berlokasi di Kudus Kota, dekat kampus UMK, dengan variasi sambal pedas sebagai daya tariknya.',
                 'rating' => 4.0,
             ],
             [
@@ -512,7 +512,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Kedai Twins Seblak Bandung n Juice Jekulo',
                 'slug' => 'kedai-twins-seblak-bandung-juice-jekulo',
-                'category' => 'Makanan',
+                'category' => 'Minuman',
                 'kecamatan' => 'Jekulo',
                 'hero_image' => $baseUrl . 'kedaytwins_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Kedai Twins Seblak Bandung & Juice Jekulo"',
@@ -560,7 +560,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Warung Mie Dadat Pak Karnan',
                 'slug' => 'warung-mie-dadat',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Jekulo',
                 'hero_image' => $baseUrl . 'warungmiedadat_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Warung Mie Dadat Pak Karnan"',
@@ -572,7 +572,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Toko Risfan Snack - Pusat Grosir Snack Lengkap di Kudus',
                 'slug' => 'toko-risfan-snack',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Jekulo',
                 'hero_image' => $baseUrl . 'tokorisfan_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Toko Risfan Snack"',
@@ -584,7 +584,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Js Muslim Collection Kudus',
                 'slug' => 'js-muslim-collection',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Jekulo',
                 'hero_image' => $baseUrl . 'jsmuslim_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Js Muslim Collection Kudus"',
@@ -596,7 +596,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Kios Hjh Zaroah',
                 'slug' => 'kios-hjh',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Jekulo',
                 'hero_image' => $baseUrl . 'kioshjh_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Kios Hjh Zaroah"',
@@ -608,7 +608,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Jahe Rempah Leggit',
                 'slug' => 'jahe-rempah-leggit',
-                'category' => 'Kuliner',
+                'category' => 'Minuman',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'jaherempahreggit_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Jahe Rempah Leggit"',
@@ -620,7 +620,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Warung Makan Bu Carik',
                 'slug' => 'warung-makan-bu-carik',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'warungmakanbucarik_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Warung Makan Bu Carik"',
@@ -632,7 +632,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Tehatea Indonesia',
                 'slug' => 'tehatea-indonesia',
-                'category' => 'Kuliner',
+                'category' => 'Minuman',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'tehatea_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Tehatea Indonesia"',
@@ -644,7 +644,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Warung Makan 2 Putra',
                 'slug' => 'warung-makan-2-putra',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'warungmakan2putra_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Warung Makan 2 Putra"',
@@ -668,7 +668,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Sego Sambel Lek Kas 2',
                 'slug' => 'sego-sambel-lek-kas2',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'segosambel_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Sego Sambel Lek Kas 2"',
@@ -680,7 +680,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Toko Jamaah',
                 'slug' => 'toko-jamaah',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'tokojamaah_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Toko Jamaah"',
@@ -692,7 +692,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'MM Amanah',
                 'slug' => 'mm-amanah',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'mmamanah_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "MM Amanah"',
@@ -704,7 +704,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Toko Van Helen Serba 35000',
                 'slug' => 'toko-van-helen',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'tokovanhelen_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Toko Van Helen Serba 35000"',
@@ -716,7 +716,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Lina Family',
                 'slug' => 'lina-family',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Kaliwungu',
                 'hero_image' => $baseUrl . 'linafamily_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Lina Family"',
@@ -728,8 +728,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Susu Moeria',
                 'slug' => 'susu-moeria',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Minuman',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'susumoeria_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Susu Moeria"',
                 'hero_subtitle' => 'Nikmati kesegaran susu murni 0pilihan yang diolah higienis dan tersedia dalam berbagai varian rasa. Cocok untuk semua usia dan waktu.',
@@ -740,8 +740,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Ramboo Chicken',
                 'slug' => 'ramboo-chicken',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Makanan',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'ramboo_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ramboo Chicken"',
                 'hero_subtitle' => 'Nikmati cita rasa ayam geprek khas Kudus dengan berbagai pilihan menu lezat dan harga terjangkau.',
@@ -752,8 +752,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Es Gempol Pak Masykur',
                 'slug' => 'es-gempol-pak-masykur',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Minuman',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'gempol_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Es Gempol Pak Masykur"',
                 'hero_subtitle' => 'Rasakan kesegaran es gempol dengan santan gurih, gula merah manis, dan aroma pandan yang khas. Minuman tradisional yang menyegarkan di setiap tegukan.',
@@ -765,19 +765,19 @@ class UmkmSeeder extends Seeder
                 'name' => 'Sultan Barber Top',
                 'slug' => 'sultan-barber-top',
                 'category' => 'Jasa',
-                'kecamatan' => 'Kota Kudus',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'sultanbarbertop_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Sultan Barber Top"',
                 'hero_subtitle' => 'Barbershop modern di Kudus yang menawarkan potongan rambut bergaya, layanan premium, dan suasana nyaman untuk semua kalangan.',
                 'description' => 'Sultan Barber Top adalah barbershop modern yang menjadi salah satu destinasi perawatan rambut pria terpopuler di Kudus. Dengan tim barber berpengalaman, tempat ini menghadirkan berbagai gaya potongan rambut terkini, pelayanan ramah, serta suasana santai dan bersih yang membuat pelanggan merasa nyaman.',
-                'about' => '<strong>Sultan Barber Top</strong> adalah barbershop profesional yang mengutamakan kualitas layanan dan kenyamanan pelanggan. Berlokasi strategis di pusat kota Kudus, Sultan Barber Top menyediakan layanan potong rambut modern, shaving, hair wash, hingga styling dengan produk perawatan rambut terbaik. Mengusung konsep tempat yang cozy dan bergaya urban, barbershop ini menjadi pilihan utama bagi pria yang ingin tampil rapi dan stylish setiap hari.',
+                'about' => '<strong>Sultan Barber Top</strong> adalah barbershop profesional yang mengutamakan kualitas layanan dan kenyamanan pelanggan. Berlokasi strategis di pusat Kudus Kota, Sultan Barber Top menyediakan layanan potong rambut modern, shaving, hair wash, hingga styling dengan produk perawatan rambut terbaik. Mengusung konsep tempat yang cozy dan bergaya urban, barbershop ini menjadi pilihan utama bagi pria yang ingin tampil rapi dan stylish setiap hari.',
                 'rating' => 5.0,
             ],
             [
                 'name' => 'Soto Kudus Bu Jatmi',
                 'slug' => 'soto-kudus-bu-jatmi',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Makanan',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'sotokudusbujatmi_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Soto Kudus Bu Jatmi"',
                 'hero_subtitle' => 'Warung soto legendaris yang menjadi ikon kuliner khas Kudus, menyajikan cita rasa autentik dengan pilihan daging kerbau maupun ayam.',
@@ -788,8 +788,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Treend Steak Kudus',
                 'slug' => 'treend-steak-kudus',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Makanan',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'treendsteak_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang Restoran "Treend Steak Kudus"',
                 'hero_subtitle' => 'Restoran steak di Kudus yang menyajikan berbagai pilihan steak lezat dengan cita rasa khas dan harga terjangkau.',
@@ -800,8 +800,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Larees Jaya Electronics',
                 'slug' => 'larees-jaya-electronics',
-                'category' => 'Toko',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Barang',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'lareesjaya_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang Toko "Larees Jaya Electronics"',
                 'hero_subtitle' => 'Toko elektronik terpercaya di Kudus yang menyediakan berbagai kebutuhan rumah tangga dan peralatan elektronik modern.',
@@ -812,8 +812,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Es Coklat Cokot Kudus',
                 'slug' => 'es-coklat-cokot-kudus',
-                'category' => 'Kuliner',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Minuman',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'escoklatcokotkudus_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang "Es Coklat Cokot Kudus"',
                 'hero_subtitle' => 'Kafe cokelat di Kudus dengan minuman cokelat dingin dan varian topping kekinian.',
@@ -824,8 +824,8 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Richie Store Kudus',
                 'slug' => 'richie-store-kudus',
-                'category' => 'Toko',
-                'kecamatan' => 'Kota Kudus',
+                'category' => 'Lainnya',
+                'kecamatan' => 'Kudus Kota',
                 'hero_image' => $baseUrl . 'richiestore_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang Toko "Richie Store Kudus"',
                 'hero_subtitle' => 'Toko pakaian muslim dan fashion modern di Kudus dengan koleksi trendi dan harga bersahabat.',
@@ -872,7 +872,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Ikan Bakar Nasuky Mubarok Jepang',
                 'slug' => 'ikan-bakar-nasuky-mubarok-jepang',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'ikanbakar_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ikan Bakar Nasuky Mubarok Jepang"',
@@ -884,7 +884,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'RM Bu Sarah',
                 'slug' => 'rm-bu-sarah',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'rmbusarah_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "RM Bu Sarah"',
@@ -896,7 +896,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Sate Kambing Pak Brewok Pekeng',
                 'slug' => 'sate-kambing-pak-brewok',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'satekambing_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Sate Kambing Pak Brewok Pekeng"',
@@ -908,7 +908,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Loh Jinawi Olshop (Lapak Gelang Tasbih)',
                 'slug' => 'loh-jinawi',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'lohjinawi_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Loh Jinawi Olshop (Lapak Gelang Tasbih)"',
@@ -920,7 +920,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Toko Auralia Jaya',
                 'slug' => 'toko-auralia',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'tokoauralia_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Toko Auralia Jaya"',
@@ -932,7 +932,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Sekar Modiste',
                 'slug' => 'sekar-modiste',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'sekar_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Sekar Modiste"',
@@ -944,7 +944,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Hasna Fashion 01',
                 'slug' => 'hasna-fashion',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Mejobo',
                 'hero_image' => $baseUrl . 'hasna_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Hasna Fashion 01"',
@@ -956,7 +956,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Queen Seblak Prasmanan',
                 'slug' => 'queen-seblak-prasmanan',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'queenseblak_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Queen Seblak Prasmanan"',
@@ -968,7 +968,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Ayam Geprek Mak Ginting',
                 'slug' => 'ayam-geprek-mak-ginting',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'geprekmakginting_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ayam Geprek Mak Ginting"',
@@ -980,7 +980,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Warung Sate & Gule Pak Sugiyo',
                 'slug' => 'warung-sate-dan-gule-pak-sugiyo',
-                'category' => 'Kuliner',
+                'category' => 'Makanan',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'warungsatedangule_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Warung Sate & Gule Pak Sugiyo"',
@@ -1016,7 +1016,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Ngabus Rejo',
                 'slug' => 'ngabus-rejo',
-                'category' => 'Toko',
+                'category' => 'Barang',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'ngabusrejo_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ngabus Rejo"',
@@ -1028,7 +1028,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Nano Distro',
                 'slug' => 'nano-distro',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'nanodistro_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Nano Distro"',
@@ -1040,7 +1040,7 @@ class UmkmSeeder extends Seeder
             [
                 'name' => 'Ilbabalanos Store',
                 'slug' => 'ilbabalanos',
-                'category' => 'Toko',
+                'category' => 'Lainnya',
                 'kecamatan' => 'Undaan',
                 'hero_image' => $baseUrl . 'ilbabalanos_hero.webp',
                 'hero_title' => 'Informasi Lengkap tentang UMKM "Ilbabalanos Store"',

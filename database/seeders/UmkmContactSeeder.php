@@ -119,9 +119,9 @@ class UmkmContactSeeder extends Seeder
             UmkmContact::updateOrCreate(
                 ['umkm_id' => $umkmId],
                 [
-                    'whatsapp' => $contactData['whatsapp'] === '-' ? null : $contactData['whatsapp'],
-                    'email' => $contactData['email'] === '-' ? null : $contactData['email'],
-                    'instagram' => $contactData['instagram'] === '-' ? null : $contactData['instagram'],
+                    'whatsapp' => $contactData['whatsapp'],
+                    'email' => $contactData['email'],
+                    'instagram' => $contactData['instagram'],
                     'status' => 'active',
                 ]
             );

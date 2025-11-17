@@ -399,7 +399,7 @@ class UmkmGallerySeeder extends Seeder
             [
                 'slug' => 'warnet-jaya-sentosa',
                 'galleryImages' => [
-                    $baseUrl . 'warnet_menu1.webp',
+                    $baseUrl . 'warnetjayasentosa_hero.webp',
                 ],
             ],
             [
