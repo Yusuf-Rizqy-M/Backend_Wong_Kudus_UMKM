@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryBlogController extends Controller
 {
+    public function totalCategoryBlogs()
+    {
+        $total = CategoryBlog::count();
+
+        return response()->json([
+            'total_category_blogs' => $total,
+            'message' => "Terdapat $total kategori blog."
+        ]);
+    }
+
     public function createCategory(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -32,6 +42,15 @@ class CategoryBlogController extends Controller
             'description' => $request->description,
             'status' => 'active',
         ]);
+
+        // 🟢 Tambah Activity
+        logActivity(
+            'admin',
+            "Membuat kategori blog baru: {$category->title}",
+            'create',
+            $category->id,
+            'category_blogs'
+        );
 
         return response()->json([
             'status' => true,
@@ -106,6 +125,15 @@ class CategoryBlogController extends Controller
 
         $category->save();
 
+        // 🟢 Tambah Activity
+        logActivity(
+            'admin',
+            "Mengupdate kategori blog: {$category->title}",
+            'update',
+            $category->id,
+            'category_blogs'
+        );
+
         return response()->json([
             'status' => true,
             'message' => 'Kategori berhasil diubah.',
@@ -133,6 +161,15 @@ class CategoryBlogController extends Controller
 
         $category->status = 'inactive';
         $category->save();
+
+        // 🟢 Tambah Activity
+        logActivity(
+            'admin',
+            "Menonaktifkan kategori blog: {$category->title}",
+            'delete',
+            $category->id,
+            'category_blogs'
+        );
 
         return response()->json([
             'status' => true,

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use App\Http\Controllers\API\logActivity;
 use App\Http\Controllers\Controller;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
@@ -12,13 +12,9 @@ use Illuminate\Validation\Rule;
 
 class UmkmController extends Controller
 {
-    /**
-     * Daftar semua relasi untuk di-load.
-     * Kita buat variabel agar tidak berulang-ulang mengetik.
-     */
     protected $relations = [
         'category',
-        'gallery', // <-- REVISI: Sesuai nama fungsi baru di model
+        'gallery',
         'openingHours',
         'listing',
         'location',
@@ -26,18 +22,24 @@ class UmkmController extends Controller
         'menus'
     ];
 
-    /**
-     * Fungsi helper untuk mengubah semua path gambar menjadi URL.
-     * Ini untuk menghindari duplikasi kode di setiap method.
-     */
+    public function totalUmkm()
+    {
+        $total = Umkm::count();
+
+        logActivity('admin', 'Admin mengambil total UMKM', 'read', null, 'umkms');
+
+        return response()->json([
+            'total_umkm' => $total,
+            'message' => "$total UMKM terdaftar di sistem."
+        ]);
+    }
+
     protected function transformUmkmUrls($umkm)
     {
-        // 1. Handle hero_image utama
         if ($umkm->hero_image) {
             $umkm->hero_image = url(Storage::url($umkm->hero_image));
         }
 
-        // 2. Handle relasi gallery (asumsi kolom 'image')
         if ($umkm->gallery) {
             foreach ($umkm->gallery as $item) {
                 if ($item->image) {
@@ -46,36 +48,32 @@ class UmkmController extends Controller
             }
         }
 
-        // 3. Handle relasi menus (asumsi kolom 'file')
         if ($umkm->menus) {
             foreach ($umkm->menus as $menu) {
-                if ($menu->file) { // Asumsi dari seeder Anda, kolomnya 'file'
+                if ($menu->file) {
                     $menu->file = url(Storage::url($menu->file));
                 }
             }
         }
-        
-        // 4. Handle relasi category (asumsi kolom 'icon')
+
         if ($umkm->category && $umkm->category->icon) {
-             $umkm->category->icon = url(Storage::url($umkm->category->icon));
+            $umkm->category->icon = url(Storage::url($umkm->category->icon));
         }
 
         return $umkm;
     }
 
-    /**
-     * Menampilkan semua data UMKM.
-     */
     public function index()
     {
-        $umkms = Umkm::with($this->relations) // <-- REVISI: Load semua relasi
+        $umkms = Umkm::with($this->relations)
             ->where('status', 'active')
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($umkm) {
-                // <-- REVISI: Gunakan helper function
                 return $this->transformUmkmUrls($umkm);
             });
+
+        logActivity('admin', 'Admin mengambil semua daftar UMKM', 'read', null, 'umkms');
 
         return response()->json([
             'status' => true,
@@ -84,12 +82,8 @@ class UmkmController extends Controller
         ], 200);
     }
 
-    /**
-     * Menampilkan detail satu UMKM.
-     */
     public function show($id)
     {
-        // <-- REVISI: Load semua relasi
         $umkm = Umkm::with($this->relations)->find($id);
 
         if (!$umkm) {
@@ -100,8 +94,9 @@ class UmkmController extends Controller
             ], 404);
         }
 
-        // <-- REVISI: Gunakan helper function
         $this->transformUmkmUrls($umkm);
+
+        logActivity('admin', 'Admin melihat detail UMKM ' . $umkm->name, 'read', $umkm->id, 'umkms');
 
         return response()->json([
             'status' => true,
@@ -110,9 +105,6 @@ class UmkmController extends Controller
         ], 200);
     }
 
-    /**
-     * Menyimpan UMKM baru.
-     */
     public function store(Request $request)
     {
         $listKecamatan = ['Kudus Kota', 'Jati', 'Bae', 'Mejobo', 'Undaan', 'Gebog', 'Dawe'];
@@ -139,7 +131,6 @@ class UmkmController extends Controller
 
         $data = $validator->validated();
 
-        // Buat slug unik
         $slug = Str::slug($data['name']);
         $count = 1;
         while (Umkm::where('slug', $slug)->exists()) {
@@ -148,7 +139,6 @@ class UmkmController extends Controller
         }
         $data['slug'] = $slug;
 
-        // Handle upload gambar
         if ($request->hasFile('hero_image')) {
             $path = $request->file('hero_image')->store('uploads/umkm', 'public');
             $data['hero_image'] = $path;
@@ -157,13 +147,11 @@ class UmkmController extends Controller
         $data['status'] = 'active';
 
         $umkm = Umkm::create($data);
+        $umkm->load($this->relations);
 
-        // Ambil data baru dengan SEMUA relasi
-        // Relasi baru (gallery, menu, dll) akan jadi array kosong, dan ini benar.
-        $umkm->load($this->relations); // <-- REVISI
+        $this->transformUmkmUrls($umkm);
 
-        // Ubah path gambar menjadi URL lengkap untuk respons
-        $this->transformUmkmUrls($umkm); // <-- REVISI
+        logActivity('admin', 'Admin membuat UMKM ' . $umkm->name, 'create', $umkm->id, 'umkms');
 
         return response()->json([
             'status' => true,
@@ -172,9 +160,6 @@ class UmkmController extends Controller
         ], 201);
     }
 
-    /**
-     * Memperbarui data UMKM.
-     */
     public function update(Request $request, $id)
     {
         $umkm = Umkm::find($id);
@@ -212,7 +197,6 @@ class UmkmController extends Controller
 
         $data = $validator->validated();
 
-        // Handle update slug jika nama berubah
         if ($request->has('name') && $request->name !== $umkm->name) {
             $slug = Str::slug($data['name']);
             $count = 1;
@@ -223,7 +207,6 @@ class UmkmController extends Controller
             $data['slug'] = $slug;
         }
 
-        // Handle update gambar
         if ($request->hasFile('hero_image')) {
             if ($umkm->hero_image && Storage::disk('public')->exists($umkm->hero_image)) {
                 Storage::disk('public')->delete($umkm->hero_image);
@@ -233,11 +216,12 @@ class UmkmController extends Controller
         }
 
         $umkm->update($data);
-        $umkm->refresh(); 
-        $umkm->load($this->relations); // <-- REVISI: Load semua relasi
+        $umkm->refresh();
+        $umkm->load($this->relations);
 
-        // Ubah path gambar menjadi URL lengkap untuk respons
-        $this->transformUmkmUrls($umkm); // <-- REVISI
+        $this->transformUmkmUrls($umkm);
+
+        logActivity('admin', 'Admin memperbarui UMKM ' . $umkm->name, 'update', $umkm->id, 'umkms');
 
         return response()->json([
             'status' => true,
@@ -246,9 +230,6 @@ class UmkmController extends Controller
         ], 200);
     }
 
-    /**
-     * Menghapus UMKM (Soft Delete).
-     */
     public function destroy($id)
     {
         $umkm = Umkm::find($id);
@@ -260,13 +241,14 @@ class UmkmController extends Controller
                 'data' => null
             ], 404);
         }
-        
-        // Load semua relasi sebelum mengubah data
-        $umkm->load($this->relations); // <-- REVISI
 
-        // Cek apakah sudah inactive
+        $umkm->load($this->relations);
+
         if ($umkm->status === 'inactive') {
-            $this->transformUmkmUrls($umkm); // <-- REVISI
+            $this->transformUmkmUrls($umkm);
+
+            logActivity('admin', 'Admin mencoba menonaktifkan UMKM yang sudah inactive: ' . $umkm->name, 'update', $umkm->id, 'umkms');
+
             return response()->json([
                 'status' => false,
                 'message' => 'UMKM sudah tidak aktif',
@@ -274,12 +256,13 @@ class UmkmController extends Controller
             ], 400);
         }
 
-        // Lakukan soft delete
         $umkm->status = 'inactive';
         $umkm->save();
         $umkm->refresh();
 
-        $this->transformUmkmUrls($umkm); // <-- REVISI
+        $this->transformUmkmUrls($umkm);
+
+        logActivity('admin', 'Admin menonaktifkan UMKM ' . $umkm->name, 'delete', $umkm->id, 'umkms');
 
         return response()->json([
             'status' => true,

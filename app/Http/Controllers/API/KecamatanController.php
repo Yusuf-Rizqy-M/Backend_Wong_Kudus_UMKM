@@ -8,6 +8,15 @@ use App\Http\Controllers\Controller;
 
 class KecamatanController extends Controller
 {
+    public function totalKecamatan()
+    {
+        $total = Kecamatan::count();
+
+        return response()->json([
+            'total_kecamatan' => $total,
+            'message' => "Terdapat $total kecamatan di Kabupaten Kudus."
+        ]);
+    }
     public function index()
     {
         return response()->json(Kecamatan::all());

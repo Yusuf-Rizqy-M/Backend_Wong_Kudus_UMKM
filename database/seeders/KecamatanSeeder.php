@@ -9,7 +9,7 @@ class KecamatanSeeder extends Seeder
 {
     public function run(): void
     {
-        $baseUrl = 'http://127.0.0.1:8000/storage/uploads/kecamatan/';
+        $baseUrl = 'https://api-umkmwongkudus.rplrus.com/storage/uploads/kecamatan/';
 
         $kecamatans = [
             ['name' => 'Bae', 'slug' => 'bae', 'image' => $baseUrl . 'kecamatan_bae.webp'],

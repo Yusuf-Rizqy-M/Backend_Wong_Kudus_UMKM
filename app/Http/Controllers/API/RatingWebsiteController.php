@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class RatingWebsiteController extends Controller
 {
+    public function totalRating()
+    {
+        $total = RatingWebsite::count();
+
+        return response()->json([
+            'total_rating' => $total,
+            'message' => "Terdapat $total rating untuk website."
+        ]);
+    }
+
     public function index()
     {
         $ratings = RatingWebsite::orderBy('created_at', 'desc')->get()->map(function ($rating) {
@@ -21,9 +31,9 @@ class RatingWebsiteController extends Controller
         });
 
         return response()->json([
-            'status'  => true,
+            'status' => true,
             'message' => 'Daftar rating berhasil diambil.',
-            'data'    => $ratings
+            'data' => $ratings
         ], 200);
     }
 
@@ -33,9 +43,9 @@ class RatingWebsiteController extends Controller
 
         if (!$rating) {
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => 'Rating tidak ditemukan.',
-                'data'    => null
+                'data' => null
             ], 404);
         }
 
@@ -44,28 +54,28 @@ class RatingWebsiteController extends Controller
         }
 
         return response()->json([
-            'status'  => true,
+            'status' => true,
             'message' => 'Detail rating berhasil diambil.',
-            'data'    => $rating
+            'data' => $rating
         ], 200);
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'         => 'required|string|max:100',
-            'name_last'    => 'nullable|string|max:100',
-            'email'        => 'nullable|email',
-            'rating'       => 'required|numeric|min:0|max:5',
+            'name' => 'required|string|max:100',
+            'name_last' => 'nullable|string|max:100',
+            'email' => 'nullable|email',
+            'rating' => 'required|numeric|min:0|max:5',
             'photo_profil' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'comment'      => 'nullable|string|max:500',
+            'comment' => 'nullable|string|max:500',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => 'Validasi gagal.',
-                'errors'  => $validator->errors()
+                'errors' => $validator->errors()
             ], 422);
         }
 
@@ -81,10 +91,19 @@ class RatingWebsiteController extends Controller
             $rating->photo_profil = url(Storage::url($rating->photo_profil));
         }
 
+        // 🔥 CATAT AKTIVITAS
+        logActivity(
+            'user',
+            'User memberikan rating ' . $rating->rating,
+            'rating',
+            $rating->id,
+            'rating_websites'
+        );
+
         return response()->json([
-            'status'  => true,
+            'status' => true,
             'message' => 'Rating berhasil dikirim.',
-            'data'    => $rating
+            'data' => $rating
         ], 201);
     }
 
@@ -119,6 +138,12 @@ class RatingWebsiteController extends Controller
         ], 200);
     }
 
+        return response()->json([
+            'status' => true,
+            'message' => 'Rata-rata rating website.',
+            'average' => round($average, 2)
+        ], 200);
+    }
 
     public function destroy($id)
     {
@@ -126,9 +151,9 @@ class RatingWebsiteController extends Controller
 
         if (!$rating) {
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => 'Rating tidak ditemukan.',
-                'data'    => null
+                'data' => null
             ], 404);
         }
 
@@ -138,10 +163,19 @@ class RatingWebsiteController extends Controller
 
         $rating->delete();
 
+        // 🔥 LOG AKTIVITAS DELETE
+        logActivity(
+            'admin',
+            'Admin menghapus rating ID ' . $id,
+            'delete',
+            $id,
+            'rating_websites'
+        );
+
         return response()->json([
-            'status'  => true,
+            'status' => true,
             'message' => 'Rating berhasil dihapus.',
-            'data'    => null
+            'data' => null
         ], 200);
     }
 }

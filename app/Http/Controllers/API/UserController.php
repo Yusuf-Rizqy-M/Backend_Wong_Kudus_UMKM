@@ -56,6 +56,7 @@ class UserController extends Controller
         ], 200);
     }
 
+
     // === LOGOUT (SUDAH ADA) ===
     public function logout(Request $request)
     {
@@ -108,7 +109,7 @@ class UserController extends Controller
         $user->name = $request->name;
 
         // Update foto profil
-        if ($request->hasFile('foto_profil')) {
+        if ($request->hasFile(key: 'foto_profil')) {
             // Hapus foto lama jika ada
             if ($user->foto_profil) {
                 Storage::delete('public/' . $user->foto_profil);
@@ -134,4 +135,27 @@ class UserController extends Controller
             ],
         ], 200);
     }
+    // === GET SEMUA USER (BARU) ===
+    public function allUsers()
+    {
+        $users = User::select('id', 'name', 'email', 'foto_profil', 'created_at')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($user) {
+                return [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'foto_profil' => $user->foto_profil ? url('/storage/' . $user->foto_profil) : null,
+                    'created_at' => $user->created_at->format('Y-m-d H:i:s'),
+                ];
+            });
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Daftar semua user berhasil diambil.',
+            'data' => $users,
+        ], 200);
+    }
+
 }

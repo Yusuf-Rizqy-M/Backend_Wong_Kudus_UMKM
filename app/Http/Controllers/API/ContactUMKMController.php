@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactUmkmController extends Controller
 {
+    public function totalContactUmkm()
+    {
+        $total = ContactUmkm::count();
+
+        return response()->json([
+            'total_contact_umkm' => $total,
+            'message' => "Terdapat $total pesan masuk dari pengunjung."
+        ]);
+    }
+
     public function index()
     {
         $contacts = ContactUmkm::orderBy('created_at', 'desc')->get();
@@ -46,6 +56,15 @@ class ContactUmkmController extends Controller
             'message' => $request->message,
             'status' => 'active',
         ]);
+
+        // 🔥 LOG: User mengirim pesan
+        logActivity(
+            'user',
+            'User mengirim pesan ke UMKM',
+            'contact',
+            $contact->id,
+            'contact_umkms'
+        );
 
         return response()->json([
             'status' => true,
@@ -95,39 +114,57 @@ class ContactUmkmController extends Controller
 
         $contact->update(['status' => 'inactive']);
 
+        // 🔥 LOG: Admin menonaktifkan pesan
+        logActivity(
+            'admin',
+            'Admin menonaktifkan pesan dari ' . $contact->sender_email,
+            'delete',
+            $contact->id,
+            'contact_umkms'
+        );
+
         return response()->json([
             'status' => true,
             'message' => 'Pesan berhasil dinonaktifkan.',
             'data' => $contact
         ], 200);
     }
+
     public function markAsRead($id)
-{
-    $contact = ContactUmkm::find($id);
+    {
+        $contact = ContactUmkm::find($id);
 
-    if (!$contact) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Pesan tidak ditemukan',
-            'data' => null
-        ], 404);
-    }
+        if (!$contact) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Pesan tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
 
-    if ($contact->status === 'read') {
+        if ($contact->status === 'read') {
+            return response()->json([
+                'status' => false,
+                'message' => 'Pesan sudah dibaca',
+                'data' => $contact
+            ], 400);
+        }
+
+        $contact->update(['status' => 'read']);
+
+        // 🔥 LOG: Admin membaca pesan
+        logActivity(
+            'admin',
+            'Admin menandai pesan sebagai dibaca (' . $contact->sender_email . ')',
+            'read',
+            $contact->id,
+            'contact_umkms'
+        );
+
         return response()->json([
-            'status' => false,
-            'message' => 'Pesan sudah dibaca',
+            'status' => true,
+            'message' => 'Pesan berhasil ditandai sebagai dibaca',
             'data' => $contact
-        ], 400);
+        ], 200);
     }
-
-    $contact->update(['status' => 'read']);
-
-    return response()->json([
-        'status' => true,
-        'message' => 'Pesan berhasil ditandai sebagai dibaca',
-        'data' => $contact
-    ], 200);
-}
-
 }
