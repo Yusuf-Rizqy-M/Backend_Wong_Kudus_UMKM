@@ -7,6 +7,7 @@ use App\Models\RatingWebsite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class RatingWebsiteController extends Controller
 {
@@ -108,27 +109,34 @@ class RatingWebsiteController extends Controller
 
     public function average()
     {
-        $ratings = RatingWebsite::select('rating', \DB::raw('COUNT(*) as total'))
+        $ratings = RatingWebsite::select('rating', DB::raw('COUNT(*) as total'))
             ->groupBy('rating')
             ->get();
 
         if ($ratings->isEmpty()) {
             return response()->json([
-                'status' => false,
+                'status'  => false,
                 'message' => 'Belum ada rating.',
                 'average' => 0
             ], 200);
         }
 
         $totalNilai = 0;
-        $totalVote = 0;
+        $totalVote  = 0;
 
         foreach ($ratings as $r) {
             $totalNilai += $r->rating * $r->total;
-            $totalVote += $r->total;
+            $totalVote  += $r->total;
         }
 
         $average = $totalNilai / $totalVote;
+
+        return response()->json([
+            'status'  => true,
+            'message' => 'Rata-rata rating website.',
+            'average' => round($average, 2)
+        ], 200);
+    }
 
         return response()->json([
             'status' => true,

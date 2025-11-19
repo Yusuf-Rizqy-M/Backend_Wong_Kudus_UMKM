@@ -482,7 +482,7 @@ class UmkmGallerySeeder extends Seeder
             [
                 'slug' => 'toko-jamaah',
                 'galleryImages' => [
-                    $baseUrl . 'tokojamaah_galerifoto1.webp',
+                    $baseUrl . 'tokojemaah_galerifoto1.webp',
                     $baseUrl . 'tokojemaah_galerifoto2.webp',
                 ],
             ],
