@@ -51,7 +51,7 @@ class UmkmContactController extends Controller
                 'nullable',
                 'string',
                 'max:20',
-                'regex:/^\+?[0-9]+$/', // ✅ hanya angka dan boleh ada tanda +
+                'regex:/^\+?[0-9]+$/',
             ],
             'email' => 'nullable|email|max:255',
             'instagram' => 'nullable|string|max:255',
@@ -69,7 +69,6 @@ class UmkmContactController extends Controller
 
         $data = $validator->validated();
 
-        // 🔒 Cegah duplikasi kontak untuk satu UMKM
         $existingContact = UmkmContact::where('umkm_id', $data['umkm_id'])->first();
         if ($existingContact) {
             return response()->json([
@@ -82,6 +81,15 @@ class UmkmContactController extends Controller
         $data['status'] = 'active';
         $contact = UmkmContact::create($data);
         $contact->refresh();
+
+        // 🔥 LOG AKTIVITAS
+        logActivity(
+            'admin',
+            'Admin menambahkan kontak untuk UMKM ID ' . $contact->umkm_id,
+            'create',
+            $contact->id,
+            'umkm_contacts'
+        );
 
         return response()->json([
             'status' => true,
@@ -106,7 +114,7 @@ class UmkmContactController extends Controller
                 'nullable',
                 'string',
                 'max:20',
-                'regex:/^\+?[0-9]+$/', // ✅ validasi nomor + angka
+                'regex:/^\+?[0-9]+$/',
             ],
             'email' => 'nullable|email|max:255',
             'instagram' => 'nullable|string|max:255',
@@ -128,6 +136,15 @@ class UmkmContactController extends Controller
         $contact = UmkmContact::updateOrCreate(
             ['umkm_id' => $umkm->id],
             $data
+        );
+
+        // 🔥 LOG AKTIVITAS
+        logActivity(
+            'admin',
+            'Admin memperbarui kontak UMKM ID ' . $umkm->id,
+            'update',
+            $contact->id,
+            'umkm_contacts'
         );
 
         return response()->json([
@@ -161,6 +178,15 @@ class UmkmContactController extends Controller
         $contact->save();
         $contact->refresh();
 
+        // 🔥 LOG AKTIVITAS
+        logActivity(
+            'admin',
+            'Admin menonaktifkan kontak UMKM ID ' . $contact->umkm_id,
+            'delete',
+            $contact->id,
+            'umkm_contacts'
+        );
+
         return response()->json([
             'status' => true,
             'message' => 'Kontak berhasil dinonaktifkan',
@@ -191,6 +217,15 @@ class UmkmContactController extends Controller
         $contact->status = 'active';
         $contact->save();
         $contact->refresh();
+
+        // 🔥 LOG AKTIVITAS
+        logActivity(
+            'admin',
+            'Admin mengaktifkan kembali kontak UMKM ID ' . $contact->umkm_id,
+            'update',
+            $contact->id,
+            'umkm_contacts'
+        );
 
         return response()->json([
             'status' => true,

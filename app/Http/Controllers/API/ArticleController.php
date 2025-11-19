@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
+    public function totalArticles()
+    {
+        $total = ArticleBlog::count();
+
+        return response()->json([
+            'total_articles' => $total,
+            'message' => "Terdapat $total artikel blog di database."
+        ]);
+    }
     public function index()
     {
         $articles = ArticleBlog::where('status', 'active')->get()->map(function ($article) {
@@ -53,6 +62,13 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        logActivity(
+            'admin',
+            "Menambahkan artikel baru: {$data['title']}",
+            'create',
+            $article->id,
+            'article_blogs'
+        );
         $validator = Validator::make($request->all(), [
             'category_blog_id' => 'required|exists:category_blogs,id',
             'author' => 'required|string|max:255',
@@ -88,10 +104,18 @@ class ArticleController extends Controller
             'message' => 'Artikel berhasil dibuat',
             'data' => $article
         ], 201);
+
     }
 
     public function update(Request $request, $id)
     {
+        logActivity(
+            'admin',
+            "Mengupdate artikel: {$article->title}",
+            'update',
+            $article->id,
+            'article_blogs'
+        );
         $article = ArticleBlog::find($id);
 
         if (!$article) {
@@ -143,6 +167,13 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
+        logActivity(
+            'admin',
+            "Menonaktifkan artikel: {$article->title}",
+            'delete',
+            $article->id,
+            'article_blogs'
+        );
         $article = ArticleBlog::find($id);
 
         if (!$article) {

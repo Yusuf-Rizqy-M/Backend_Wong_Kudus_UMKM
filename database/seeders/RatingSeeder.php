@@ -34,7 +34,7 @@ class RatingSeeder extends Seeder
                 'name' => 'Andre',
                 'name_last' => 'Onana',
                 'email' => 'andre@onana.com',
-                'rating' => 4.8,
+                'rating' => 4,
                 'photo_profil' => 'uploads/rating_photos/onana.png',
                 'comment' => 'Sebagai orang luar negeri, saya kagum. Website ini modern dan mudah digunakan!',
                 'created_at' => now(),

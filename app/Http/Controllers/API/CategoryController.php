@@ -10,17 +10,70 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    // Mencegah URL double
+    public function totalCategories()
+    {
+        $total = Category::count();
+
+        return response()->json([
+            'total_categories' => $total
+        ]);
+    }
+
+    public function indexWithUmkm()
+    {
+        try {
+            $categories = Category::with([
+                'umkms' => function ($query) {
+                    $query->where('status', 'active')
+                        ->with(['gallery', 'openingHours', 'menus', 'location', 'contact'])
+                        ->orderBy('id');
+                }
+            ])
+                ->where('status', 'active')
+                ->orderBy('id')
+                ->get()
+                ->map(function ($category) {
+                    $category->icon = $this->fixUrl($category->icon);
+
+                    $category->data_umkm = $category->umkms->map(function ($umkm) {
+                        $umkm->hero_image = $this->fixUrl($umkm->hero_image);
+
+                        $umkm->gallery = $umkm->gallery->map(function ($img) {
+                            $img->image = $this->fixUrl($img->image);
+                            return $img;
+                        });
+
+                        $umkm->menus = $umkm->menus->map(function ($menu) {
+                            $menu->image = $this->fixUrl($menu->image);
+                            return $menu;
+                        });
+
+                        return $umkm;
+                    });
+
+                    unset($category->umkms);
+                    return $category;
+                });
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Daftar kategori dengan UMKM berhasil diambil',
+                'data' => $categories
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal mengambil data: ' . $e->getMessage(),
+                'data' => null
+            ], 500);
+        }
+    }
+
     private function fixUrl($path)
     {
         if (!$path) return null;
-
-        // Jika sudah HTTP (URL penuh) — KEMBALIKAN apa adanya
-        if (str_starts_with($path, 'http')) {
-            return $path;
-        }
-
-        // Jika path biasa -> convert ke URL storage
+        if (str_starts_with($path, 'http')) return $path;
         return url(Storage::url($path));
     }
 
@@ -77,7 +130,6 @@ class CategoryController extends Controller
 
         $data = $validator->validated();
 
-        // Simpan hanya PATH bukan URL
         if ($request->hasFile('icon')) {
             $path = $request->file('icon')->store('uploads/categories', 'public');
             $data['icon'] = $path;
@@ -86,6 +138,15 @@ class CategoryController extends Controller
         $data['status'] = 'active';
 
         $category = Category::create($data);
+
+        // 🔥 LOG AKTIVITAS CREATE
+        logActivity(
+            'admin',
+            'Admin membuat kategori ' . $category->name,
+            'create',
+            $category->id,
+            'categories'
+        );
 
         $category->icon = $this->fixUrl($category->icon);
 
@@ -126,7 +187,6 @@ class CategoryController extends Controller
         $data = $validator->validated();
 
         if ($request->hasFile('icon')) {
-
             if ($category->icon && Storage::disk('public')->exists($category->icon)) {
                 Storage::disk('public')->delete($category->icon);
             }
@@ -136,6 +196,15 @@ class CategoryController extends Controller
         }
 
         $category->update($data);
+
+        // 🔥 LOG AKTIVITAS UPDATE
+        logActivity(
+            'admin',
+            'Admin memperbarui kategori ' . $category->name,
+            'update',
+            $category->id,
+            'categories'
+        );
 
         $category->icon = $this->fixUrl($category->icon);
 
@@ -168,6 +237,15 @@ class CategoryController extends Controller
 
         $category->status = 'inactive';
         $category->save();
+
+        // 🔥 LOG AKTIVITAS DELETE / DEACTIVATE
+        logActivity(
+            'admin',
+            'Admin menonaktifkan kategori ' . $category->name,
+            'delete',
+            $category->id,
+            'categories'
+        );
 
         $category->icon = $this->fixUrl($category->icon);
 
