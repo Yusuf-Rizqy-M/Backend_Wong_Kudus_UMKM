@@ -511,7 +511,7 @@ class UmkmOpeningHoursSeeder extends Seeder
 
             // 36. Kedai Es Bang Maman
             [
-                'slug' => 'kedai-es-bang-m enrichment',
+                'slug' => 'kedai-es-bang-maman',
                 'openingHours' => [
                     ['day' => 'Senin', 'hours' => '09.00 - 17.00', 'isOpen' => true],
                     ['day' => 'Selasa', 'hours' => '09.00 - 17.00', 'isOpen' => true],
@@ -1112,7 +1112,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
             // UNDAAN
-                // 79. Queen Seblak Prasmanan
+            // 79. Queen Seblak Prasmanan
             [
                 'slug' => 'queen-seblak-prasmanan',
                 'openingHours' => [
@@ -1126,7 +1126,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 80. Ayam Geprek Mak Ginting
+            // 80. Ayam Geprek Mak Ginting
             [
                 'slug' => 'ayam-geprek-mak-ginting',
                 'openingHours' => [
@@ -1140,7 +1140,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 81. Warung Sate & Gule Pak Sugiyo
+            // 81. Warung Sate & Gule Pak Sugiyo
             [
                 'slug' => 'warung-sate-dan-gule-pak-sugiyo',
                 'openingHours' => [
@@ -1154,7 +1154,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 82. MJ Teknik
+            // 82. MJ Teknik
             [
                 'slug' => 'mj-teknik',
                 'openingHours' => [
@@ -1168,7 +1168,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 83. Fotocopy & Jasa Travel
+            // 83. Fotocopy & Jasa Travel
             [
                 'slug' => 'fotocopy-dan-jasa-travel',
                 'openingHours' => [
@@ -1182,7 +1182,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 84. Ngabus Rejo
+            // 84. Ngabus Rejo
             [
                 'slug' => 'ngabus-rejo',
                 'openingHours' => [
@@ -1196,7 +1196,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 85. Nano Distro
+            // 85. Nano Distro
             [
                 'slug' => 'nano-distro',
                 'openingHours' => [
@@ -1210,7 +1210,7 @@ class UmkmOpeningHoursSeeder extends Seeder
                 ]
             ],
 
-                // 86. Ilbabalanos Store
+            // 86. Ilbabalanos Store
             [
                 'slug' => 'ilbabalanos',
                 'openingHours' => [

@@ -138,13 +138,6 @@ class RatingWebsiteController extends Controller
         ], 200);
     }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Rata-rata rating website.',
-            'average' => round($average, 2)
-        ], 200);
-    }
-
     public function destroy($id)
     {
         $rating = RatingWebsite::find($id);

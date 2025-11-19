@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-
 class ArticleController extends Controller
 {
     public function totalArticles()
@@ -21,6 +20,7 @@ class ArticleController extends Controller
             'message' => "Terdapat $total artikel blog di database."
         ]);
     }
+
     public function index()
     {
         $articles = ArticleBlog::where('status', 'active')->get()->map(function ($article) {
@@ -62,13 +62,6 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
-        logActivity(
-            'admin',
-            "Menambahkan artikel baru: {$data['title']}",
-            'create',
-            $article->id,
-            'article_blogs'
-        );
         $validator = Validator::make($request->all(), [
             'category_blog_id' => 'required|exists:category_blogs,id',
             'author' => 'required|string|max:255',
@@ -95,6 +88,15 @@ class ArticleController extends Controller
 
         $article = ArticleBlog::create($data);
 
+        // LOG ACTIVITY setelah berhasil create
+        logActivity(
+            'admin',
+            "Menambahkan artikel baru: {$article->title}",
+            'create',
+            $article->id,
+            'article_blogs'
+        );
+
         if ($article->image) {
             $article->image = url(Storage::url($article->image));
         }
@@ -104,18 +106,10 @@ class ArticleController extends Controller
             'message' => 'Artikel berhasil dibuat',
             'data' => $article
         ], 201);
-
     }
 
     public function update(Request $request, $id)
     {
-        logActivity(
-            'admin',
-            "Mengupdate artikel: {$article->title}",
-            'update',
-            $article->id,
-            'article_blogs'
-        );
         $article = ArticleBlog::find($id);
 
         if (!$article) {
@@ -154,6 +148,15 @@ class ArticleController extends Controller
 
         $article->update($data);
 
+        // LOG ACTIVITY setelah update
+        logActivity(
+            'admin',
+            "Mengupdate artikel: {$article->title}",
+            'update',
+            $article->id,
+            'article_blogs'
+        );
+
         if ($article->image) {
             $article->image = url(Storage::url($article->image));
         }
@@ -167,13 +170,6 @@ class ArticleController extends Controller
 
     public function destroy($id)
     {
-        logActivity(
-            'admin',
-            "Menonaktifkan artikel: {$article->title}",
-            'delete',
-            $article->id,
-            'article_blogs'
-        );
         $article = ArticleBlog::find($id);
 
         if (!$article) {
@@ -195,6 +191,15 @@ class ArticleController extends Controller
         $article->status = 'inactive';
         $article->save();
 
+        // LOG ACTIVITY setelah menonaktifkan
+        logActivity(
+            'admin',
+            "Menonaktifkan artikel: {$article->title}",
+            'delete',
+            $article->id,
+            'article_blogs'
+        );
+
         if ($article->image) {
             $article->image = url(Storage::url($article->image));
         }
@@ -205,9 +210,11 @@ class ArticleController extends Controller
             'data' => $article
         ], 200);
     }
+
     public function getArticlesByCategory($id)
     {
         $category = CategoryBlog::where('id', $id)->where('status', 'active')->first();
+
         if (!$category) {
             return response()->json([
                 'status' => false,
@@ -216,17 +223,20 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        $articles = ArticleBlog::where('category_blog_id', $id)->where('status', 'active')->get()->map(function ($article) {
-            if ($article->image) {
-                $article->image = url(Storage::url($article->image));
-            }
-            return $article;
-        });
+        $articles = ArticleBlog::where('category_blog_id', $id)
+            ->where('status', 'active')
+            ->get()
+            ->map(function ($article) {
+                if ($article->image) {
+                    $article->image = url(Storage::url($article->image));
+                }
+                return $article;
+            });
 
         if ($articles->isEmpty()) {
             return response()->json([
                 'status' => false,
-                'message' => 'Tidak ada artikel yang ditemukan untuk kategori ini.',
+                'message' => 'Tidak ada artikel untuk kategori ini.',
                 'data' => []
             ], 200);
         }
@@ -237,9 +247,7 @@ class ArticleController extends Controller
             'data' => $articles
         ], 200);
     }
-    /**
-     * Get detail artikel + kategori + related articles (untuk frontend)
-     */
+
     public function showDetail($id)
     {
         $article = ArticleBlog::with('categoryBlog')
@@ -255,15 +263,12 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        // Format image
         if ($article->image) {
             $article->image = url(Storage::url($article->image));
         }
 
-        // Ambil nama kategori
         $categoryName = $article->categoryBlog?->title ?? 'Lainnya';
 
-        // Ambil 3 artikel terkait (kategori sama, bukan artikel ini)
         $relatedArticles = ArticleBlog::where('category_blog_id', $article->category_blog_id)
             ->where('id', '!=', $article->id)
             ->where('status', 'active')
