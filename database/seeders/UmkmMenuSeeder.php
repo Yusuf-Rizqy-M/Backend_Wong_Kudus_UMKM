@@ -48,9 +48,9 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Nasi Ayam Baper', 'description' => 'Ikan segar dibakar dengan bumbu spesial yang menggugah selera.', 'price' => 'Rp 14.000', 'image' => 'uploads/umkm/vjocafe_menu2.webp'],
             ],
             'toko-al-maira' => [
-                ['name' => 'Bahan Bahan Makanan', 'description' => 'Menjual berbagai bahan makanan pokok seperti beras, gula, minyak goreng, tepung, dan bumbu dapur lengkap untuk kebutuhan rumah tangga.', 'price' => 'Mulai dari Rp 5.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
-                ['name' => 'Minuman dan Snack', 'description' => 'Tersedia aneka minuman ringan, kopi, teh, serta berbagai camilan kemasan untuk teman bersantai.', 'price' => 'Mulai dari Rp 3.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
-                ['name' => 'Produk Rumah Tangga', 'description' => 'Menyediakan perlengkapan harian seperti sabun, deterjen, dan kebutuhan kebersihan rumah.', 'price' => 'Mulai dari Rp 7.000', 'image' => 'uploads/umkm/tokoalmaria_menu1.webp'],
+                ['name' => 'Bahan Bahan Makanan', 'description' => 'Menjual berbagai bahan makanan pokok seperti beras, gula, minyak goreng, tepung, dan bumbu dapur lengkap untuk kebutuhan rumah tangga.', 'price' => 'Mulai dari Rp 5.000', 'image' => 'uploads/umkm/tokoalmaira_menu1.webp'],
+                ['name' => 'Minuman dan Snack', 'description' => 'Tersedia aneka minuman ringan, kopi, teh, serta berbagai camilan kemasan untuk teman bersantai.', 'price' => 'Mulai dari Rp 3.000', 'image' => 'uploads/umkm/tokoalmaira_menu1.webp'],
+                ['name' => 'Produk Rumah Tangga', 'description' => 'Menyediakan perlengkapan harian seperti sabun, deterjen, dan kebutuhan kebersihan rumah.', 'price' => 'Mulai dari Rp 7.000', 'image' => 'uploads/umkm/tokoalmaira_menu1.webp'],
             ],
             'siskanuna-boutique' => [
                 ['name' => 'Dress & Gamis', 'description' => 'Koleksi dress dan gamis elegan untuk berbagai acara, dari kasual hingga formal.', 'price' => 'Mulai dari Rp 75.000', 'image' => 'uploads/umkm/siskanuna_menu1.webp'],
@@ -311,6 +311,9 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Sundubu Jigae', 'description' => 'Sup tahu lembut ala Korea dengan kuah pedas gurih dan isian seafood atau daging pilihan.', 'price' => 'Rp 48.000', 'image' => 'uploads/umkm/moeria_menu7.webp'],
                 ['name' => 'Nasi Goreng Kimchi', 'description' => 'Nasi goreng dengan cita rasa khas kimchi Korea yang asam, pedas, dan menggugah selera.', 'price' => 'Rp 48.000', 'image' => 'uploads/umkm/moeria_menu8.webp'],
             ],
+            'basina-food' => [
+                ['name' => 'Aneka Masakan Rumahan Basina Food', 'description' => 'Nikmati berbagai pilihan menu rumahan seperti nasi goreng, ayam geprek, ayam bali, sayur lodeh, dan lauk pauk lainnya', 'price' => 'Mulai dari Rp 1.000 - Rp 25.000', 'image' => 'uploads/umkm/basina_menu1.webp'],
+            ],
             'ramboo-chicken' => [
                 ['name' => 'Dada Ramboo Fighter', 'description' => 'Ayam goreng tepung dengan sambal pedas khas Kudus.', 'price' => 'Rp 23.000', 'image' => 'uploads/umkm/ramboo_menu1.webp'],
                 ['name' => 'Basic Breash', 'description' => 'Ayam bakar dengan olesan madu manis gurih.', 'price' => 'Rp 20.000', 'image' => 'uploads/umkm/ramboo_menu2.webp'],
@@ -525,7 +528,7 @@ class UmkmMenuSeeder extends Seeder
                     'name' => 'Hijab & Aksesori',
                     'description' => 'Beragam model hijab dan aksesori pelengkap seperti ciput, bros, dan pin hijab dengan bahan berkualitas.',
                     'price' => 'Mulai dari Rp 25.000',
-                    'image' => 'uploads/umkm/jsmuslim_menu2.webp',
+                    'image' => 'uploads/umkm/jsmuslim_menu1.webp',
                 ],
             ],
             'kios-hjh' => [

@@ -49,16 +49,22 @@ class UmkmLocationController extends Controller
             'embed_url' => 'nullable|string',
         ]);
 
-        // Cek apakah UMKM sudah punya lokasi aktif
-        $existing = UmkmLocation::where('umkm_id', $validatedData['umkm_id'])
-            ->where('status', 'active')
-            ->first();
+        $umkmCheck = Umkm::find($validatedData['umkm_id']);
+        if (!$umkmCheck || $umkmCheck->status !== 'active') {
+            return response()->json(['status' => false, 'message' => 'UMKM tidak aktif'], 404);
+        }
+
+        $existing = UmkmLocation::where('umkm_id', $validatedData['umkm_id'])->first();
 
         if ($existing) {
+            $validatedData['status'] = 'active';
+            $existing->update($validatedData);
+
             return response()->json([
-                'status' => false,
-                'message' => 'UMKM ini sudah memiliki lokasi aktif. Tidak dapat menambahkan lokasi baru.'
-            ], 409);
+                'status' => true,
+                'message' => 'Lokasi berhasil diperbarui/diaktifkan kembali',
+                'data' => $existing
+            ], 200);
         }
 
         $validatedData['status'] = 'active';
@@ -107,23 +113,10 @@ class UmkmLocationController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Lokasi tidak ditemukan',
-                'data' => null
             ], 404);
         }
 
-        // Jika sudah nonaktif, kembalikan respons bahwa data sudah tidak aktif
-        if ($location->status === 'inactive') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Lokasi sudah tidak aktif',
-                'data' => $location
-            ], 400);
-        }
-
-        // Nonaktifkan lokasi
-        $location->status = 'inactive';
-        $location->save();
-        $location->refresh();
+        $location->update(['status' => 'inactive']);
 
         return response()->json([
             'status' => true,
@@ -131,7 +124,8 @@ class UmkmLocationController extends Controller
             'data' => $location
         ], 200);
     }
-   public function activate($id)
+
+    public function activate($id)
     {
         $location = UmkmLocation::find($id);
 
@@ -142,8 +136,7 @@ class UmkmLocationController extends Controller
             ], 404);
         }
 
-        $location->status = 'active';
-        $location->save();
+        $location->update(['status' => 'active']);
 
         return response()->json([
             'status' => true,

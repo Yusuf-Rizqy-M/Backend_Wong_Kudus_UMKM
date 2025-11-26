@@ -10,15 +10,15 @@ class UmkmContact extends Model
 {
     use HasFactory;
 
-    
-    protected $primaryKey = 'umkm_id';
-    public $incrementing = false;
+    // protected $primaryKey = 'umkm_id';
+    // public $incrementing = false;
 
     protected $fillable = [
         'umkm_id',
         'whatsapp',
         'email',
         'instagram',
+        'status',
     ];
 
     public function umkm(): BelongsTo

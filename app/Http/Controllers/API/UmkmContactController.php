@@ -7,151 +7,97 @@ use App\Models\Umkm;
 use App\Models\UmkmContact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\API\logActivity;
 
 class UmkmContactController extends Controller
 {
+    private function prepareData(Request $request)
+    {
+        $fields = ['email', 'whatsapp', 'instagram'];
+        foreach ($fields as $field) {
+            $val = $request->input($field);
+            if (!$val || trim($val) === '' || $val === 'null' || trim($val) === '-' || ($field === 'whatsapp' && $val === '62')) {
+                $request->merge([$field => null]);
+            }
+        }
+    }
+
     public function index()
     {
         $contacts = UmkmContact::where('status', 'active')->get();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Daftar kontak berhasil diambil',
-            'data' => $contacts
-        ], 200);
+        return response()->json(['status' => true, 'data' => $contacts], 200);
     }
 
-    public function show(Umkm $umkm)
+    public function show($umkmId)
     {
-        $contact = UmkmContact::where('umkm_id', $umkm->id)
+        $contact = UmkmContact::where('umkm_id', $umkmId)
             ->where('status', 'active')
             ->first();
 
         if (!$contact) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kontak tidak ditemukan',
-                'data' => null
-            ], 404);
+            return response()->json(['status' => true, 'data' => null], 200);
         }
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Detail kontak berhasil diambil',
-            'data' => $contact
-        ], 200);
+        return response()->json(['status' => true, 'data' => $contact], 200);
     }
 
     public function store(Request $request)
     {
+        $this->prepareData($request);
+
         $validator = Validator::make($request->all(), [
             'umkm_id' => 'required|exists:umkms,id',
-            'whatsapp' => [
-                'nullable',
-                'string',
-                'max:20',
-                'regex:/^\+?[0-9]+$/',
-            ],
+            'whatsapp' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
             'instagram' => 'nullable|string|max:255',
-        ], [
-            'whatsapp.regex' => 'Nomor WhatsApp hanya boleh berisi angka dan tanda + di awal.',
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validasi gagal',
-                'data' => $validator->errors()
-            ], 422);
+            return response()->json(['status' => false, 'message' => 'Validasi gagal', 'data' => $validator->errors()], 422);
         }
 
-        $data = $validator->validated();
-
-        $existingContact = UmkmContact::where('umkm_id', $data['umkm_id'])->first();
-        if ($existingContact) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Setiap UMKM hanya boleh memiliki satu data kontak',
-                'data' => $existingContact
-            ], 409);
-        }
-
-        $data['status'] = 'active';
-        $contact = UmkmContact::create($data);
-        $contact->refresh();
-
-        // 🔥 LOG AKTIVITAS
-        logActivity(
-            'admin',
-            'Admin menambahkan kontak untuk UMKM ID ' . $contact->umkm_id,
-            'create',
-            $contact->id,
-            'umkm_contacts'
-        );
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Kontak berhasil ditambahkan',
-            'data' => [
-                'id' => $contact->id,
-                'umkm_id' => $contact->umkm_id,
-                'whatsapp' => $contact->whatsapp,
-                'email' => $contact->email,
-                'instagram' => $contact->instagram,
-                'status' => $contact->status,
-                'created_at' => $contact->created_at,
-                'updated_at' => $contact->updated_at,
-            ]
-        ], 201);
-    }
-
-    public function update(Request $request, Umkm $umkm)
-    {
-        $validator = Validator::make($request->all(), [
-            'whatsapp' => [
-                'nullable',
-                'string',
-                'max:20',
-                'regex:/^\+?[0-9]+$/',
-            ],
-            'email' => 'nullable|email|max:255',
-            'instagram' => 'nullable|string|max:255',
-        ], [
-            'whatsapp.regex' => 'Nomor WhatsApp hanya boleh berisi angka dan tanda + di awal.',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validasi gagal',
-                'data' => $validator->errors()
-            ], 422);
+        $umkmCheck = Umkm::find($request->umkm_id);
+        if (!$umkmCheck || $umkmCheck->status !== 'active') {
+            return response()->json(['status' => false, 'message' => 'UMKM tidak aktif'], 404);
         }
 
         $data = $validator->validated();
         $data['status'] = 'active';
 
         $contact = UmkmContact::updateOrCreate(
-            ['umkm_id' => $umkm->id],
+            ['umkm_id' => $request->umkm_id],
             $data
         );
 
-        // 🔥 LOG AKTIVITAS
-        logActivity(
-            'admin',
-            'Admin memperbarui kontak UMKM ID ' . $umkm->id,
-            'update',
-            $contact->id,
-            'umkm_contacts'
+        logActivity('admin', 'Upsert kontak UMKM ID ' . $contact->umkm_id, 'create', $contact->id, 'umkm_contacts');
+
+        return response()->json(['status' => true, 'message' => 'Berhasil disimpan', 'data' => $contact], 201);
+    }
+
+    public function update(Request $request, $umkmId)
+    {
+        $this->prepareData($request);
+
+        $validator = Validator::make($request->all(), [
+            'whatsapp' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'instagram' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'message' => 'Validasi gagal', 'data' => $validator->errors()], 422);
+        }
+
+        $data = $validator->validated();
+        $data['status'] = 'active';
+
+        $contact = UmkmContact::updateOrCreate(
+            ['umkm_id' => $umkmId],
+            $data
         );
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Kontak berhasil disimpan',
-            'data' => $contact
-        ], 200);
+        logActivity('admin', 'Update kontak UMKM ID ' . $umkmId, 'update', $contact->id, 'umkm_contacts');
+
+        return response()->json(['status' => true, 'message' => 'Berhasil disimpan', 'data' => $contact], 200);
     }
 
     public function destroy($id)
@@ -159,39 +105,12 @@ class UmkmContactController extends Controller
         $contact = UmkmContact::find($id);
 
         if (!$contact) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kontak tidak ditemukan',
-                'data' => null
-            ], 404);
+            return response()->json(['status' => false, 'message' => 'Tidak ditemukan'], 404);
         }
 
-        if ($contact->status === 'inactive') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kontak sudah tidak aktif',
-                'data' => $contact
-            ], 400);
-        }
+        $contact->update(['status' => 'inactive']);
 
-        $contact->status = 'inactive';
-        $contact->save();
-        $contact->refresh();
-
-        // 🔥 LOG AKTIVITAS
-        logActivity(
-            'admin',
-            'Admin menonaktifkan kontak UMKM ID ' . $contact->umkm_id,
-            'delete',
-            $contact->id,
-            'umkm_contacts'
-        );
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Kontak berhasil dinonaktifkan',
-            'data' => $contact
-        ], 200);
+        return response()->json(['status' => true, 'message' => 'Dinonaktifkan'], 200);
     }
 
     public function activate($id)
@@ -199,38 +118,11 @@ class UmkmContactController extends Controller
         $contact = UmkmContact::find($id);
 
         if (!$contact) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kontak tidak ditemukan',
-                'data' => null
-            ], 404);
+            return response()->json(['status' => false, 'message' => 'Tidak ditemukan'], 404);
         }
 
-        if ($contact->status === 'active') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Kontak sudah aktif',
-                'data' => $contact
-            ], 400);
-        }
+        $contact->update(['status' => 'active']);
 
-        $contact->status = 'active';
-        $contact->save();
-        $contact->refresh();
-
-        // 🔥 LOG AKTIVITAS
-        logActivity(
-            'admin',
-            'Admin mengaktifkan kembali kontak UMKM ID ' . $contact->umkm_id,
-            'update',
-            $contact->id,
-            'umkm_contacts'
-        );
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Kontak berhasil diaktifkan kembali',
-            'data' => $contact
-        ], 200);
+        return response()->json(['status' => true, 'message' => 'Diaktifkan'], 200);
     }
 }

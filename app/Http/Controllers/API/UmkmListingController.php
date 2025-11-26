@@ -11,28 +11,20 @@ use Illuminate\Support\Facades\Storage;
 
 class UmkmListingController extends Controller
 {
-    /**
-     * Helper untuk mengubah path gambar menjadi URL
-     */
-    private function getImageUrl($listing)
+    private function transformListing($listing)
     {
-        if ($listing->image) {
+        if ($listing && $listing->image) {
             $listing->image = url(Storage::url($listing->image));
         }
         return $listing;
     }
 
-    /**
-     * Menampilkan semua listing yang 'active'.
-     */
     public function index()
     {
         $listings = UmkmListing::where('status', 'active')
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function ($listing) {
-                return $this->getImageUrl($listing);
-            });
+            ->map(fn($l) => $this->transformListing($l));
 
         return response()->json([
             'status' => true,
@@ -41,13 +33,10 @@ class UmkmListingController extends Controller
         ], 200);
     }
 
-    /**
-     * Menyimpan data listing baru.
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'umkm_id' => 'required|exists:umkms,id|unique:umkm_listings,umkm_id',
+            'umkm_id' => 'required|exists:umkms,id',
             'category' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
             'location' => 'nullable|string|max:255',
@@ -65,43 +54,56 @@ class UmkmListingController extends Controller
 
         $data = $validator->validated();
 
-        // === VALIDASI: location HARUS SAMA dengan kecamatan di UMKM ===
         $umkm = Umkm::find($data['umkm_id']);
-        if ($umkm && $data['location'] && $data['location'] !== $umkm->kecamatan) {
+        if (!$umkm || $umkm->status !== 'active') {
+            return response()->json(['status' => false, 'message' => 'UMKM tidak aktif'], 404);
+        }
+
+        if ($data['location'] && $data['location'] !== $umkm->kecamatan) {
             return response()->json([
                 'status' => false,
-                'message' => 'Validasi gagal',
-                'data' => [
-                    'location' => ['Lokasi di listing harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan]
-                ]
+                'message' => 'Lokasi harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan
             ], 422);
         }
 
-        $data['status'] = 'active';
-
-        // Handle upload gambar
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads/umkm', 'public');
-            $data['image'] = $path;
+            $data['image'] = $request->file('image')->store('uploads/umkm', 'public');
         }
 
+        $existing = UmkmListing::where('umkm_id', $data['umkm_id'])->first();
+
+        if ($existing) {
+            if ($request->hasFile('image') && $existing->image) {
+                if (Storage::disk('public')->exists($existing->image)) {
+                    Storage::disk('public')->delete($existing->image);
+                }
+            }
+
+            $data['status'] = 'active';
+            $existing->update($data);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Listing berhasil diperbarui dan diaktifkan',
+                'data' => $this->transformListing($existing)
+            ], 200);
+        }
+
+        $data['status'] = 'active';
         $listing = UmkmListing::create($data);
 
         return response()->json([
             'status' => true,
             'message' => 'Listing berhasil dibuat',
-            'data' => $this->getImageUrl($listing)
+            'data' => $this->transformListing($listing)
         ], 201);
     }
 
-    /**
-     * Menampilkan detail satu listing.
-     */
     public function show($id)
     {
         $listing = UmkmListing::find($id);
 
-        if (!$listing) {
+        if (!$listing || $listing->status !== 'active') {
             return response()->json([
                 'status' => false,
                 'message' => 'Listing tidak ditemukan',
@@ -112,25 +114,19 @@ class UmkmListingController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Detail listing berhasil diambil',
-            'data' => $this->getImageUrl($listing)
+            'data' => $this->transformListing($listing)
         ], 200);
     }
 
-    /**
-     * Memperbarui data listing.
-     */
     public function update(Request $request, $id)
     {
         $listing = UmkmListing::find($id);
         if (!$listing) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Listing tidak ditemukan',
-            ], 404);
+            return response()->json(['status' => false, 'message' => 'Listing tidak ditemukan'], 404);
         }
 
         $validator = Validator::make($request->all(), [
-            'umkm_id' => 'sometimes|required|exists:umkms,id|unique:umkm_listings,umkm_id,' . $listing->id,
+            'umkm_id' => 'sometimes|exists:umkms,id',
             'category' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
             'location' => 'nullable|string|max:255',
@@ -140,78 +136,56 @@ class UmkmListingController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validasi gagal',
-                'data' => $validator->errors()
-            ], 422);
+            return response()->json(['status' => false, 'message' => 'Validasi gagal', 'data' => $validator->errors()], 422);
         }
 
         $data = $validator->validated();
 
-        // === VALIDASI: Jika location diisi, harus sama dengan kecamatan UMKM ===
-        if (isset($data['location'])) {
-            $umkmId = $data['umkm_id'] ?? $listing->umkm_id;
-            $umkm = Umkm::find($umkmId);
-            if ($umkm && $data['location'] && $data['location'] !== $umkm->kecamatan) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validasi gagal',
-                    'data' => [
-                        'location' => ['Lokasi di listing harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan]
-                    ]
-                ], 422);
+        if (isset($data['umkm_id']) && $data['umkm_id'] != $listing->umkm_id) {
+            $cekDuplicate = UmkmListing::where('umkm_id', $data['umkm_id'])->where('id', '!=', $id)->exists();
+            if ($cekDuplicate) {
+                return response()->json(['status' => false, 'message' => 'UMKM ID sudah digunakan di listing lain'], 409);
             }
         }
 
-        // Handle update gambar
+        if (isset($data['location'])) {
+            $umkmId = $data['umkm_id'] ?? $listing->umkm_id;
+            $umkm = Umkm::find($umkmId);
+            if ($umkm && $data['location'] !== $umkm->kecamatan) {
+                return response()->json(['status' => false, 'message' => 'Lokasi harus sama dengan kecamatan UMKM: ' . $umkm->kecamatan], 422);
+            }
+        }
+
         if ($request->hasFile('image')) {
             if ($listing->image && Storage::disk('public')->exists($listing->image)) {
                 Storage::disk('public')->delete($listing->image);
             }
-            $path = $request->file('image')->store('uploads/umkm', 'public');
-            $data['image'] = $path;
+            $data['image'] = $request->file('image')->store('uploads/umkm', 'public');
         }
 
         $listing->update($data);
-        $listing->refresh();
 
         return response()->json([
             'status' => true,
             'message' => 'Listing berhasil diperbarui',
-            'data' => $this->getImageUrl($listing)
+            'data' => $this->transformListing($listing)
         ], 200);
     }
 
-    /**
-     * Menghapus listing (Soft Delete).
-     */
     public function destroy($id)
     {
         $listing = UmkmListing::find($id);
 
         if (!$listing) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Listing tidak ditemukan',
-            ], 404);
+            return response()->json(['status' => false, 'message' => 'Listing tidak ditemukan'], 404);
         }
 
-        if ($listing->status === 'inactive') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Listing sudah tidak aktif',
-            ], 400);
-        }
-
-        $listing->status = 'inactive';
-        $listing->save();
-        $listing->refresh();
+        $listing->update(['status' => 'inactive']);
 
         return response()->json([
             'status' => true,
             'message' => 'Listing berhasil dinonaktifkan',
-            'data' => $this->getImageUrl($listing)
+            'data' => $this->transformListing($listing)
         ], 200);
     }
 }

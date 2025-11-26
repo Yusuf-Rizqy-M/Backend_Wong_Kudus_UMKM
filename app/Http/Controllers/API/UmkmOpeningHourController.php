@@ -4,18 +4,15 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\UmkmOpeningHour;
-use App\Models\Umkm; 
+use App\Models\Umkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule; 
+use Illuminate\Validation\Rule;
 
 class UmkmOpeningHourController extends Controller
 {
     private $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
 
-    /**
-     * Menampilkan semua jam operasional yang 'active'.
-     */
     public function index()
     {
         $hours = UmkmOpeningHour::where('status', 'active')
@@ -30,9 +27,6 @@ class UmkmOpeningHourController extends Controller
         ], 200);
     }
 
-    /**
-     * Menyimpan data jam operasional baru.
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -49,22 +43,31 @@ class UmkmOpeningHourController extends Controller
                 'data' => $validator->errors()
             ], 422);
         }
-        
+
         $data = $validator->validated();
-        $data['status'] = 'active';
 
-        // Validasi agar tidak duplikat hari per UMKM
-        $existing = UmkmOpeningHour::where('umkm_id', $data['umkm_id'])
-                                  ->where('day', $data['day'])
-                                  ->first();
-
-        if ($existing) {
-             return response()->json([
+        $umkmCheck = Umkm::find($data['umkm_id']);
+        if (!$umkmCheck || $umkmCheck->status !== 'active') {
+            return response()->json([
                 'status' => false,
-                'message' => 'Jam operasional untuk hari ' . $data['day'] . ' sudah ada.',
-            ], 409); // 409 Conflict
+                'message' => 'UMKM tidak ditemukan atau tidak aktif'
+            ], 404);
         }
 
+        $existing = UmkmOpeningHour::where('umkm_id', $data['umkm_id'])
+            ->where('day', $data['day'])
+            ->first();
+
+        if ($existing) {
+            $existing->update(array_merge($data, ['status' => 'active']));
+            return response()->json([
+                'status' => true,
+                'message' => 'Jam operasional berhasil diperbarui',
+                'data' => $existing
+            ], 200);
+        }
+
+        $data['status'] = 'active';
         $hour = UmkmOpeningHour::create($data);
 
         return response()->json([
@@ -74,14 +77,11 @@ class UmkmOpeningHourController extends Controller
         ], 201);
     }
 
-    /**
-     * Menampilkan detail satu jam operasional.
-     */
     public function show($id)
     {
         $hour = UmkmOpeningHour::find($id);
 
-        if (!$hour) {
+        if (!$hour || $hour->status !== 'active') {
             return response()->json([
                 'status' => false,
                 'message' => 'Jam operasional tidak ditemukan',
@@ -96,9 +96,6 @@ class UmkmOpeningHourController extends Controller
         ], 200);
     }
 
-    /**
-     * Memperbarui data jam operasional.
-     */
     public function update(Request $request, $id)
     {
         $hour = UmkmOpeningHour::find($id);
@@ -110,10 +107,10 @@ class UmkmOpeningHourController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'umkm_id' => 'sometimes|required|exists:umkms,id',
-            'day' => ['sometimes', 'required', Rule::in($this->days)],
+            'umkm_id' => 'sometimes|exists:umkms,id',
+            'day' => ['sometimes', Rule::in($this->days)],
             'hours' => 'nullable|string|max:255',
-            'is_open' => 'sometimes|required|boolean',
+            'is_open' => 'sometimes|boolean',
             'status' => 'sometimes|in:active,inactive'
         ]);
 
@@ -124,19 +121,19 @@ class UmkmOpeningHourController extends Controller
                 'data' => $validator->errors()
             ], 422);
         }
-        
+
         $data = $validator->validated();
 
-        // Validasi duplikat jika hari atau umkm_id diubah
         if (isset($data['day']) || isset($data['umkm_id'])) {
             $umkmId = $data['umkm_id'] ?? $hour->umkm_id;
             $day = $data['day'] ?? $hour->day;
 
-            $existing = UmkmOpeningHour::where('umkm_id', $umkmId)
-                                      ->where('day', $day)
-                                      ->where('id', '!=', $id) // Abaikan data saat ini
-                                      ->first();
-            if ($existing) {
+            $duplicate = UmkmOpeningHour::where('umkm_id', $umkmId)
+                ->where('day', $day)
+                ->where('id', '!=', $id)
+                ->first();
+
+            if ($duplicate) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Jam operasional untuk hari ' . $day . ' sudah ada.',
@@ -145,7 +142,6 @@ class UmkmOpeningHourController extends Controller
         }
 
         $hour->update($data);
-        $hour->refresh();
 
         return response()->json([
             'status' => true,
@@ -154,9 +150,6 @@ class UmkmOpeningHourController extends Controller
         ], 200);
     }
 
-    /**
-     * Menghapus jam operasional (Soft Delete).
-     */
     public function destroy($id)
     {
         $hour = UmkmOpeningHour::find($id);
@@ -168,16 +161,7 @@ class UmkmOpeningHourController extends Controller
             ], 404);
         }
 
-        if ($hour->status === 'inactive') {
-            return response()->json([
-                'status' => false,
-                'message' => 'Jam operasional sudah tidak aktif',
-            ], 400);
-        }
-
-        $hour->status = 'inactive';
-        $hour->save();
-        $hour->refresh();
+        $hour->update(['status' => 'inactive']);
 
         return response()->json([
             'status' => true,
@@ -186,23 +170,21 @@ class UmkmOpeningHourController extends Controller
         ], 200);
     }
 
-    /**
-     * (Tambahan) Mengambil jam operasional berdasarkan umkm_id.
-     */
     public function getByUmkmId($umkm_id)
     {
-        if (!Umkm::where('id', $umkm_id)->exists()) {
-             return response()->json([
+        $umkm = Umkm::find($umkm_id);
+        if (!$umkm || $umkm->status !== 'active') {
+            return response()->json([
                 'status' => false,
-                'message' => 'UMKM tidak ditemukan',
+                'message' => 'UMKM tidak ditemukan atau tidak aktif',
             ], 404);
         }
-        
+
         $hours = UmkmOpeningHour::where('umkm_id', $umkm_id)
             ->where('status', 'active')
             ->orderByRaw("FIELD(day, '" . implode("','", $this->days) . "')")
             ->get();
-            
+
         return response()->json([
             'status' => true,
             'message' => 'Jam operasional berdasarkan UMKM berhasil diambil',
