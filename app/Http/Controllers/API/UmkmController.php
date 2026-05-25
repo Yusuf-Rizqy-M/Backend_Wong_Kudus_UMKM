@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\logActivity;
 use App\Http\Controllers\Controller;
 use App\Models\Umkm;
 use Illuminate\Http\Request;
