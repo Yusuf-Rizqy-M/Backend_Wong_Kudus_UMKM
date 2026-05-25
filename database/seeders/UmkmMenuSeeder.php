@@ -47,6 +47,9 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Mie Setan Level 2', 'description' => 'Ayam lada hitam dengan cita rasa gurih pedas khas restoran.', 'price' => 'Rp 9.500', 'image' => 'uploads/umkm/vjocafe_menu1.webp'],
                 ['name' => 'Nasi Ayam Baper', 'description' => 'Ikan segar dibakar dengan bumbu spesial yang menggugah selera.', 'price' => 'Rp 14.000', 'image' => 'uploads/umkm/vjocafe_menu2.webp'],
             ],
+            'warung-makan-sendang-mulia' => [
+                ['name' => 'Aneka Masakan Rumahan', 'description' => 'Menawarkan berbagai hidangan lezat seperti swike, sup ayam, ayam goreng, tumis sayur, dan masakan rumahan lainnya yang disajikan hangat setiap hari.', 'price' => 'Mulai dari Rp 10.000', 'image' => 'uploads/umkm/sendangmulia_menu1.webp']
+            ],
             'toko-al-maira' => [
                 ['name' => 'Bahan Bahan Makanan', 'description' => 'Menjual berbagai bahan makanan pokok seperti beras, gula, minyak goreng, tepung, dan bumbu dapur lengkap untuk kebutuhan rumah tangga.', 'price' => 'Mulai dari Rp 5.000', 'image' => 'uploads/umkm/tokoalmaira_menu1.webp'],
                 ['name' => 'Minuman dan Snack', 'description' => 'Tersedia aneka minuman ringan, kopi, teh, serta berbagai camilan kemasan untuk teman bersantai.', 'price' => 'Mulai dari Rp 3.000', 'image' => 'uploads/umkm/tokoalmaira_menu1.webp'],
@@ -138,6 +141,11 @@ class UmkmMenuSeeder extends Seeder
                 ['name' => 'Bakso Urat', 'description' => 'Bakso sapi dengan urat kenyal, kuah gurih, dan taburan bawang goreng yang menggugah selera.', 'price' => 'Rp 16.000', 'image' => 'uploads/umkm/malvinas_menu1.webp'],
                 ['name' => 'Mie Bakso', 'description' => 'Perpaduan mie kenyal dengan bakso sapi dan kuah kaldu hangat yang lezat.', 'price' => 'Rp 15.000', 'image' => 'uploads/umkm/malvinas_menu2.webp'],
                 ['name' => 'Es Jeruk', 'description' => 'Minuman segar dari perasan jeruk asli, cocok untuk menemani hidangan panasmu.', 'price' => 'Rp 5.000', 'image' => 'uploads/umkm/malvinas_menu3.webp'],
+            ],
+            'gravitasi-teras-muria' => [
+                ['name' => 'Nasi Goreng Gravitasi', 'description' => 'Nasi goreng spesial dengan bumbu rempah pilihan, potongan ayam, telur, dan sayuran segar. Disajikan dengan kerupuk dan acar khas Gravitasi yang menggugah selera.', 'price' => 'Rp 22.000', 'image' => 'uploads/umkm/gravitasi_menu1.webp'],
+                ['name' => 'Mie Atjeh', 'description' => 'Mie khas Aceh dengan cita rasa pedas gurih yang menggoda, disajikan dengan potongan daging sapi empuk dan taburan bawang goreng yang renyah.', 'price' => 'Rp 25.000', 'image' => 'uploads/umkm/gravitasi_menu2.webp'],
+                ['name' => 'Chicken Katsu', 'description' => 'Daging ayam fillet dibalut tepung roti renyah dan digoreng hingga keemasan, disajikan dengan nasi hangat, saus katsu, dan salad segar.', 'price' => 'Rp 25.000', 'image' => 'uploads/umkm/gravitasi_menu3.webp'],
             ],
             'warung-makan-mak-ru' => [
                 ['name' => 'Nasi Pindang Kerbau', 'description' => 'Hidangan khas Kudus dengan kuah rempah pekat dan irisan daging kerbau empuk, disajikan bersama nasi hangat dan bawang goreng.', 'price' => 'Rp 18.000', 'image' => 'uploads/umkm/makru_menu1.webp'],
